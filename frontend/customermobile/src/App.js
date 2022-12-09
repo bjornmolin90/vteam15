@@ -1,25 +1,25 @@
-import logo from './logo.svg';
+import { useState, useEffect } from 'react';
 import './App.css';
+import fetchModel from './models/model';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+  let [content, setContent] = useState("")
+  
+  useEffect(() => {
+    (async () => {
+      let fetch = await fetchModel.fetchResult()
+      setContent(fetch)
+        
+    })();
+  }, []);
 
-export default App;
+    return (
+      <div className="App">
+          {content.idtest_table}
+        
+      </div>
+    );
+  }
+
+  export default App;
+  

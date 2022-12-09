@@ -1,0 +1,66 @@
+version: "3"
+
+networks:
+    dbwebb:
+
+services:
+    server:
+        image: "bjmo21/server:1.0"
+        container_name: "server"
+        ports: 
+            - "1337:1337"
+        networks:
+            dbwebb:
+        volumes:
+            - ./backend/index:/server/index
+
+    adminwebb:
+        image: "bjmo21/adminwebb:1.0"
+        container_name: "adminwebb"
+        ports: 
+            - "1338:3000"
+        networks:
+            dbwebb:
+        volumes:
+            - ./frontend/adminwebb:/frontend/adminwebb
+        environment:
+            - WATCHPACK_POLLING=true
+
+    customermobile:
+        image: "bjmo21/customermobile:1.0"
+        container_name: "customermobile"
+        ports: 
+            - "1339:3000"
+        networks:
+            dbwebb:
+        volumes:
+            - ./frontend/customermobile:/frontend/customermobile
+        environment:
+            - WATCHPACK_POLLING=true
+
+    customerwebb:
+        image: "bjmo21/customerwebb:1.0"
+        container_name: "customerwebb"
+        ports: 
+            - "1340:3000"
+        networks:
+            dbwebb:
+        volumes:
+            - ./frontend/customerwebb:/frontend/customerwebb
+        environment:
+            - WATCHPACK_POLLING=true
+
+    database:
+        image: "mysql:latest"
+        container_name: mysql
+        volumes:
+            - mysql_vol:/var/lib/mysql
+        ports:
+            - "3306:3306"
+        networks:
+            dbwebb:
+        environment:
+            MYSQL_ALLOW_EMPTY_PASSWORD: true
+volumes:
+    mysql_vol:
+  
