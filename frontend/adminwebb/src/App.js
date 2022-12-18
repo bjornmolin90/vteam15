@@ -16,6 +16,7 @@ function App() {
     return (
       <div className="App">
           {content.idtest_table}
+          <p>test</p>
         
       </div>
     );
