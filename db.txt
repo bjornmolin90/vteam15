@@ -2,9 +2,12 @@ användare = user
 password = pass
 
 docker-compose up -d database
-docker-compose up exec database bash
+docker-compose exec database bash
 mysql -u root -p
 tryck enter
 CREATE USER ‘user’@‘localhost’ IDENTIFIED BY ‘pass’;
 GRANT ALL PRIVILEGES ON *.* TO ‘user’@’localhost’;
 FLUSH PRIVILEGES;
+
+
+useSSL=1
