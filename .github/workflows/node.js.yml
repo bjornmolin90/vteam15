@@ -25,9 +25,21 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-    - name: install dependencies
+    - name: install dependencies adminwebb
       working-directory: ./frontend/adminwebb
       run: npm install
-    - name: install dependencies
+    - name: install dependencies customerwebb
+      working-directory: ./frontend/customerwebb
+      run: npm install
+    - name: install dependencies customermobile
+      working-directory: ./frontend/customermobile
+      run: npm install
+    - name: run tests adminwebb
       working-directory: ./frontend/adminwebb
+      run: npm test
+    - name: run tests customerwebb
+      working-directory: ./frontend/customerwebb
+      run: npm test
+    - name: run tests customermobile
+      working-directory: ./frontend/customermobile
       run: npm test
