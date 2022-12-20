@@ -100,7 +100,7 @@ CREATE TABLE `user_table` (
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_id_UNIQUE` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COMMENT='Table for the users';
-CREATE ALGORITHM=UNDEFINED DEFINER=`user`@`localhost` SQL SECURITY DEFINER VIEW `vteam`.`parking_bike` AS select `bp`.`id_b` AS `id_b`,`bp`.`park_id` AS `park_id`,`p`.`city` AS `city`,`b`.`parking` AS `parking`,`b`.`charging_status` AS `charging_status`,`b`.`available_status` AS `available_status` from ((`vteam`.`bike_parking` `bp` join `vteam`.`parking_table` `p` on((`bp`.`park_id` = `p`.`parking_id`))) join `vteam`.`bike_table` `b` on((`bp`.`id_b` = `b`.`bike_id`))) order by `p`.`city`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`user`@`localhost` SQL SECURITY DEFINER VIEW `vteam`.`parking_bike` AS select `bp`.`id_b` AS `id_b`,`bp`.`park_id` AS `park_id`,`p`.`city` AS `city`,`b`.`parking` AS `parking`,`b`.`charging_status` AS `charging_status`,`b`.`available_status` AS `available_status` from ((`vteam`.`bike_parking` `bp` left outer join `vteam`.`parking_table` `p` on((`bp`.`park_id` = `p`.`parking_id`))) left outer join `vteam`.`bike_table` `b` on((`bp`.`id_b` = `b`.`bike_id`))) order by `p`.`city`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`user`@`localhost` SQL SECURITY DEFINER VIEW `vteam`.`acceptable_parking` AS select `vteam`.`parking_bike`.`park_id` AS `park_id`,`vteam`.`parking_bike`.`id_b` AS `id_b`,`vteam`.`parking_bike`.`available_status` AS `available_status`,count(`vteam`.`parking_bike`.`id_b`) AS `Antal` from `vteam`.`parking_bike` where (`vteam`.`parking_bike`.`available_status` = 'acceptable');
 
