@@ -1,0 +1,11 @@
+git checkout -b <namn på branch>
+
+git add
+git commit -m ""
+git push -u origin <namn på branch>
+
+git pull origin dev för att hämta från defaultbranchen
+
+mergea på github - ser ändringarna i filerna där innan mergen
+
+skapa .env i varje frontend med WDS_SOCKET_PORT=0  
