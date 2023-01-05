@@ -12,7 +12,7 @@ services:
         networks:
             dbwebb:
         volumes:
-            - ./backend/index:/server/index
+            - ./backend:/server
 
     adminwebb:
         image: "bjmo21/adminwebb:1.0"
@@ -52,14 +52,18 @@ services:
 
     database:
         image: "mysql:latest"
+        restart: always
         container_name: mysql
         volumes:
             - mysql_vol:/var/lib/mysql
+            - ./db/:/docker-entrypoint-initdb.d/
         ports:
-            - "3307:3306"
+            - "3308:3306"
         networks:
             dbwebb:
         environment:
-            MYSQL_ALLOW_EMPTY_PASSWORD: true
+            MYSQL_ROOT_PASSWORD: pass
+            MYSQL_DATABASE: vteam
+        
 volumes:
     mysql_vol:
