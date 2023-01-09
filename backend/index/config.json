@@ -1,8 +1,0 @@
-{
-    "host":     "database",
-    "port":     "3306",
-    "user":     "user",
-    "password": "pass",
-    "database": "vteams",
-    "multipleStatements": true
-}
