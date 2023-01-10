@@ -11,7 +11,7 @@ const mysql = require('mysql2')
 const connection = mysql.createPool({
     host: 'database',
     user: 'root',
-    password: 'pass',
+    password: '',
     database: 'vteam'
 });
 
