@@ -12,7 +12,8 @@ const connection = mysql.createPool({
     host: 'database',
     user: 'root',
     password: 'pass',
-    database: 'vteam'
+    database: 'vteam',
+    multipleStatements: true
 });
 
 module.exports = { connection }
