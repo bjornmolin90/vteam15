@@ -13,9 +13,9 @@ module.exports = class Bike {
      * @returns {object} - The updated bike object.
      * @throws {Error} - In case the database operation fails, an error is thrown.
      */
-    updateSpeed(bikeId, bikeSpeed) {
+    async updateSpeed(bikeId, bikeSpeed) {
         try {
-            return this.bikeModels.updateSpeed(bikeId, bikeSpeed);
+            return await this.bikeModels.updateSpeed(bikeId, bikeSpeed);
         }
         catch (error) {
             return error;
@@ -27,7 +27,7 @@ module.exports = class Bike {
      * 
      * @returns {number} - The speed of the bike.
      */
-    getSpeed() {
+    async getSpeed() {
         return this.speed;
     }
 

@@ -24,10 +24,11 @@ const createBike = async function (data) {
     return results[0]
 }
 
-const updateSpeed = function (data1) {
+const updateSpeed = async function (id, speed) {
     try {
-        dummyData.push(data1)
-        return
+        let sql = `UPDATE bikes SET speed = '${speed}' WHERE bike_id = ${id};`;
+        await db.connection.promise().query(sql)
+        //console.log(results[0]);
     } catch (error) {
         return error
     }
@@ -48,17 +49,28 @@ const setStatus = async function (bikeId, status) {
 }
 
 const updateBatteriLevel = async function (bikeId, battery) {
-    let sql = `UPDATE bike SET battery = ${battery} WHERE bike_id = ${bikeId};`;
+    let sql = `UPDATE bikes SET charging_status = ${battery} WHERE bike_id = ${bikeId};`;
+    const results = await db.connection.promise().query(sql)
+    //console.log(results[0]);
+    return results[0]
+}
+
+const getBatteriLevel = async function (bikeId) {
+    let sql = `SELECT charging_status FROM bikes WHERE bike_id = ${bikeId};`;
     const results = await db.connection.promise().query(sql)
     //console.log(results[0]);
     return results[0]
 }
 
 const deleteAllBikes = async function () {
-    let sql = `DELETE FROM bikes`;
-    const results = await db.connection.promise().query(sql)
-    //  console.log(results[0]);
-    return results[0]
+    try {
+        let sql = `DELETE FROM bikes`;
+        await db.connection.promise().query(sql)
+        //  console.log(results[0]); 
+    } catch (error) {
+        return error
+    }
+    
 }
 
 const deleteBikeById = async function (id) {
@@ -88,4 +100,26 @@ const getAllBikesInACity = async function (city) {
     //console.log(results[0]);
     return results[0]
 }
-module.exports = { getAllBikesInACity, deleteBikeById, updateBatteriLevel, getBikeById, createBike, getAllBikes, updateSpeed, getStatus, setStatus, deleteAllBikes, getLocation, setLocation };
+
+
+const setParking = async function (bikeId, parking) {
+    let sql = `UPDATE bikes SET parking = '${parking}' WHERE bike_id = ${bikeId};`;
+    await db.connection.promise().query(sql);
+}
+
+const deleteAllTables = async function () {
+    try {
+        let sql = 'SET FOREIGN_KEY_CHECKS = 0; TRUNCATE TABLE bike_rides; TRUNCATE TABLE users; TRUNCATE TABLE bikes; SET FOREIGN_KEY_CHECKS = 1;';
+ 
+       
+        await db.connection.promise().query(sql)
+
+        //  console.log(results[0]); 
+    } catch (error) {
+        return error
+    }
+
+}
+
+
+module.exports = {getBatteriLevel, setParking, deleteAllTables, getAllBikesInACity, deleteBikeById, updateBatteriLevel, getBikeById, createBike, getAllBikes, updateSpeed, getStatus, setStatus, deleteAllBikes, getLocation, setLocation };

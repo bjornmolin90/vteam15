@@ -1,5 +1,5 @@
 use vteam;
-DROP TABLE IF EXISTS bike_rides, users, bikes;
+DROP TABLE IF EXISTS bike_rides, users, bikes, parkinglocations;
 
 CREATE TABLE `bikes` (
   `bike_id` int NOT NULL AUTO_INCREMENT,
@@ -41,7 +41,15 @@ CREATE TABLE `bike_rides` (
   PRIMARY KEY (`ride_id`)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
+/*
+CREATE TABLE `parkinglocations` (
+  `pl_id` int NOT NULL AUTO_INCREMENT,
+  `chargers` int DEFAULT NULL,
+  `parkingZones` int DEFAULT NULL,
+  PRIMARY KEY (`pl_id`),
+  UNIQUE KEY `pl_id_UNIQUE` (`pl_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+*/
 /*
 CREATE TABLE `parking_table` (
   `parking_id` varchar(10) NOT NULL,
@@ -66,6 +74,7 @@ CREATE TABLE `bike_parking` (
   CONSTRAINT `park_id` FOREIGN KEY (`park_id`) REFERENCES `parking_table` (`parking_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 */
+/*
 
 /*
 CREATE TABLE `location_table` (
@@ -100,17 +109,7 @@ CREATE TABLE `bikeride` (
   CONSTRAINT `id_bikeride` FOREIGN KEY (`id_bikeride`) REFERENCES `bike_ride_table` (`ride_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
-CREATE TABLE `parkinglocation` (
-  `pl_id` int NOT NULL AUTO_INCREMENT,
-  `p_id` varchar(10) DEFAULT NULL,
-  `loc_id` int DEFAULT NULL,
-  PRIMARY KEY (`pl_id`),
-  UNIQUE KEY `pl_id_UNIQUE` (`pl_id`),
-  KEY `p_id_idx` (`p_id`),
-  KEY `l_id_idx` (`loc_id`),
-  CONSTRAINT `loc_id` FOREIGN KEY (`loc_id`) REFERENCES `location_table` (`location_id`),
-  CONSTRAINT `p_id` FOREIGN KEY (`p_id`) REFERENCES `parking_table` (`parking_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
 */
 
 /*

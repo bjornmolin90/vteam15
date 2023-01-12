@@ -11,8 +11,9 @@ const mysql = require('mysql2')
 const connection = mysql.createPool({
     host: 'database',
     user: 'root',
-    password: '',
-    database: 'vteam'
+    password: 'pass',
+    database: 'vteam',
+    multipleStatements: true
 });
 
 module.exports = { connection }

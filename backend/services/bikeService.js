@@ -55,7 +55,7 @@ const getAllBikes = async function() {
      */
 const deleteAllBikes = async function() {
     try {
-        return await this.bikeModels.deleteAllBikes();
+        return await bikeModels.deleteAllBikes();
     } catch (error) {
         return error;
     }
@@ -68,7 +68,7 @@ const deleteAllBikes = async function() {
      */
 const deleteBikeById = async function(id) {
     try {
-        return await this.bikeModels.deleteBikeById(id);
+        return await bikeModels.deleteBikeById(id);
     } catch (error) {
         return error;
     }
