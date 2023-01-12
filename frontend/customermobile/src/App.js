@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import fetchModel from './models/model';
+import Navbar from './components/Navbar';
+import Router from "./components/Routes";
 
 function App() {
   let [content, setContent] = useState("")
@@ -15,8 +17,9 @@ function App() {
 
     return (
       <div className="App">
+          <Navbar />
+        <Router />
           {content.idtest_table}
-          <p>test</p>
         
       </div>
     );
