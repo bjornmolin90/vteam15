@@ -1,7 +1,7 @@
 --
 -- Inserts data in to the database
 --
-
+/*
 use vteam;
 
 LOAD DATA LOCAL infile 'user.csv'
@@ -47,3 +47,4 @@ LINES
     TERMINATED BY '\n'
 IGNORE 1 LINES
 ;
+*/
