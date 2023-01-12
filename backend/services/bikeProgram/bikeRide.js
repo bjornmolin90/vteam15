@@ -89,7 +89,7 @@ module.exports = class BikeRide {
         // Starta en tidsintervall som uppdaterar bike.location varje minut
         this.interval = setInterval(async () => {
             let city = bikeCity[0].city;
-            // 
+            // Centrumkoordinater för cirkeln
             let citys = [
                 {"stockholm": { latitude: 59.338758, longitude: 18.052715 }}, 
                 { "malmö": { latitude: 55.586533, longitude: 13.018350} },
@@ -99,11 +99,13 @@ module.exports = class BikeRide {
             city = city.toString();
 
             let fCity = citys.filter(x => city in x)[0][city];
-
-            // Använd randomLocation.getRandomLocation() för att generera slumpmässiga koordinater inom en radius på 10 km från staden
+            var items = Array(10, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000, 1100, 1200, 1300, 1400, 1500);
+            var item = items[Math.floor(Math.random() * items.length)];
+         
+            // Använd randomLocation.getRandomLocation() för att generera slumpmässiga koordinater inom en radius på 5 km från staden
             const { latitude, longitude } = randomLocation.randomCircumferencePoint(
                 fCity,
-                10000
+                item
             );
             // Hämtar cykel batteri nivå
             let newBattery = await this.bikeModels.getBatteriLevel(bikeId);
@@ -117,8 +119,8 @@ module.exports = class BikeRide {
             await this.bike.setLocation(bikeId, koordinater);
             let randomBikeSpeed = Math.floor(Math.random() * 26);
             await this.bike.updateSpeed(bikeId, randomBikeSpeed);
-            console.log(koordinater)
-        }, 30000)
+            //console.log(koordinater)
+        }, 15000)
 
         const intervalData = {
             bike: bikeId,
@@ -175,17 +177,19 @@ module.exports = class BikeRide {
             parkeringsTaxa: parkeringsTaxa,
             fastTaxa: fastTaxa
         }
-        // Sparar cykelturen till databasen
-        await this.bikeRideModels.saveBikeRide(this.log);
-        await this.bike.setStatus(this.log.bike_id, "ledig");
-        await this.bike.updateSpeed(this.log.bike_id, 0);
-        await this.bike.setLocation(this.log.bike_id, this.log.endLocation);
+       
         // Söker efter ett objekt i listan 'intervals' där egenskapen 'bike'-
         // har samma värde som egenskapen 'bike_id' i objektet 'rideLog'
         const interval = await intervals.find(i => i.bike === rideLog.bike_id);
         //console.log(interval);
         // Avslutar tidsintervallet
         clearInterval(interval.interval);
+
+        // Sparar cykelturen till databasen
+        await this.bikeRideModels.saveBikeRide(this.log);
+        await this.bike.setStatus(this.log.bike_id, "ledig");
+        await this.bike.updateSpeed(this.log.bike_id, 0);
+        await this.bike.setLocation(this.log.bike_id, this.log.endLocation);
         // Skapa en ny array som exkluderar objektet som matchar rideLog.bike_id
         const updatedIntervals = intervals.filter(i => i.bike !== rideLog.bike_id);
         // Ersätt den ursprungliga arrayen intervaller med den uppdaterade arrayen

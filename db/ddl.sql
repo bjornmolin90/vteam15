@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS bike_rides, users, bikes, parkinglocations;
 CREATE TABLE `bikes` (
   `bike_id` int NOT NULL AUTO_INCREMENT,
   `city` varchar(30) NOT NULL,
-  `parking` varchar(10) DEFAULT NULL,
+  `parking` varchar(50) DEFAULT NULL,
   `charging_status` varchar(30) DEFAULT NULL,
   `available_status` varchar(20) NOT NULL,
   `m_location` varchar(50) DEFAULT NULL,
