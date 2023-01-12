@@ -7,7 +7,7 @@ const startSimulator = async function () {
 
     await bikeModels.deleteAllTables();    
 
-    for (let i = 0; i < 333; i++) {
+    for (let i = 0; i < 1000; i++) {
         bikeService.createBike({
             "city": "stockholm",
             "parking": "on-street",
@@ -16,7 +16,7 @@ const startSimulator = async function () {
             "m_location": "59.338758, 18.052715",
             "speed": "0"
         })
-    }
+    }/*
     for (let i = 0; i < 333; i++) {
         bikeService.createBike({
             "city": "malmö",
@@ -38,9 +38,9 @@ const startSimulator = async function () {
             "speed": "0"
         })
         
-    }
+    }*/
     
-    // skapar 1000 cyklar och användare med saldo
+    // skapar 1000 användare
     for (let i = 0; i < 1000; i++) {
         await User.createUser({
             "username": "username",
@@ -62,15 +62,16 @@ const startSimulator = async function () {
     }
     setTimeout(async () => {
         for (let i = 0; i < allUsers.length; i++) {
-            let log = {
+            let log = await {
                 "bike_id": temp[i].bike_id,
                 "startTime": temp[i].startTime,
                 "startLocation": temp[i].startLocation,
                 "user_id": temp[i].bike_id
             }
+         //   console.log(log);
             await new BikeRide().stopBikeRideByBikeId(log);
         }
-    }, 60000);
+    }, 120000);
 
 }
 

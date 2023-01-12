@@ -5,7 +5,7 @@ networks:
 
 services:
     server:
-        image: "server:1.1"
+        image: "bjmo21/server:1.0"
         container_name: "server"
         ports: 
             - "1337:1337"
