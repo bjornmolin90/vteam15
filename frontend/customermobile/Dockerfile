@@ -1,7 +1,13 @@
 FROM node:14
 
+WORKDIR /frontend
+
+RUN npx create-react-app customermobile
+
 WORKDIR /frontend/customermobile
 
-RUN npm install
+RUN npm install react-dom react-router-dom react-burger-menu react-icons
 
-ENTRYPOINT [ "npm", "start" ]
+RUN cp package.json ..
+
+ENTRYPOINT [ "bash", "start.bash" ]

@@ -23,9 +23,7 @@ export default function App() {
           }}
         />
       </GoogleOAuthProvider>
-      {login ?
-      <><Navbar /><Router /></> : ""
-      }
+      <><Navbar /><Router /></>
     </div>
   );
 }
