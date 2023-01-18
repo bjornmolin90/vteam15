@@ -1,3 +1,4 @@
+CREATE DATABASE IF NOT EXISTS vteam;
 use vteam;
 DROP TABLE IF EXISTS bike_rides, users, bikes, parkinglocations;
 
