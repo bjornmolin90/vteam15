@@ -22,6 +22,22 @@ const fetching = {
         
         return result
     },
+
+    parking: async function bikes() {
+        const response = await fetch(`http://localhost:1337/api/v01/locations/parkingzones`);
+        const result = await response.json();
+        console.log(result)
+        
+        return result
+    },
+
+    chargers: async function bikes() {
+        const response = await fetch(`http://localhost:1337/api/v01/locations/charger`);
+        const result = await response.json();
+        console.log(result)
+        
+        return result
+    },
 };
 
 export default fetching;
