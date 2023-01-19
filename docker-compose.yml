@@ -58,7 +58,7 @@ services:
             dbwebb:
         volumes:
             - ./frontend/customerwebb:/frontend/customerwebb
-            - /frontend/customermobile/node_modules/
+            - /frontend/customerwebb/node_modules/
         environment:
             - WATCHPACK_POLLING=true
 
