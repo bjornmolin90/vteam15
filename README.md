@@ -41,7 +41,7 @@ GET | /api/v01/city/{city} | Hämtar information om alla cyklar och laddstatione
 GET | /api/v01/bikeride/bike/{id} | Hämtar alla cykelturer för en specificerad cykel. | -
 GET | /api/v01/bikeride/user/{id} | Hämtar alla cykelturer för en specificerad användare. | -
 GET | /api/v01/bikeride | Hämtar information om alla registrerade cykelturer. | -
-POST | /api/v01/bikeride | Registrerar en ny cykeltur i systemet. | Json - {"bikeId":7, "userId":1}
+POST | /api/v01/bikeride | Startar en ny cykeltur i systemet. | Json - {"bikeId":7, "userId":1}
 PUT | /api/v01/bikeRide/stop | Avslutar och registrerar en pågående cykeltur. | Json - {"bike_id": 7,"startTime": "2023-01-03T15:54:32.788Z","startLocation": "59.42755469191417, 18.080686541663738","user_id": 1}
 GET | /api/v01/user/{id} | Hämtar information om en specificerad användare. | -
 GET | /api/v01/user | Hämtar information om alla registrerade användare. | -
