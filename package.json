@@ -1,0 +1,26 @@
+{
+  "name": "vteam15",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bjornmolin90/vteam15.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bjornmolin90/vteam15/issues"
+  },
+  "homepage": "https://github.com/bjornmolin90/vteam15#readme",
+  "dependencies": {
+    "@material-ui/core": "^4.12.4",
+    "bootstrap": "^5.1.3",
+    "react-bootstrap": "^2.7.0",
+    "react-hook-form": "^7.41.5",
+    "react-router-dom": "^6.6.1"
+  }
+}
