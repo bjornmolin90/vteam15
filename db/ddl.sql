@@ -24,6 +24,7 @@ CREATE TABLE `users` (
   `postcode` varchar(8) DEFAULT NULL,
   `city` varchar(30) DEFAULT NULL,
   `saldo` int DEFAULT NULL,
+  `u_email` varchar(45) NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_id_UNIQUE` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COMMENT='Table for the users';
