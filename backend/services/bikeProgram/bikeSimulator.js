@@ -3,6 +3,7 @@ const bikeService = require("./../bikeService");
 const User = require("./../userService");
 const BikeRide = require("./bikeRide");
 const bikeModels = require("../../models/bike");
+
 const startSimulator = async function () {
 
     await bikeModels.deleteAllTables();    
@@ -69,7 +70,7 @@ const startSimulator = async function () {
                 "user_id": temp[i].bike_id
             }
          //   console.log(log);
-            await new BikeRide().stopBikeRideByBikeId(log);
+            await new BikeRide().stopBikeRide(log);
         }
     }, 120000);
 
