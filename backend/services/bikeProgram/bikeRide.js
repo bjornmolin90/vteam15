@@ -56,7 +56,10 @@ module.exports = class BikeRide {
             } catch (error) {
                 return error
             }
-        }    
+        }
+
+
+        
 
     /**
     * Start a new bike ride and return a log of the ride.
@@ -70,8 +73,6 @@ module.exports = class BikeRide {
         //denna log returneras till frontend, som fyller på med dom 
         this.bikeId = bikeId;
         this.userId = userId;
-        let bikeCity = await this.bikeModels.getBikeById(this.bikeId);
-
         let startLocation = await this.bike.getLocation(this.bikeId);
         
         this.log = {
@@ -85,40 +86,63 @@ module.exports = class BikeRide {
 
         //skickar till databasen i tabellen bike_table att status är tagen
         await this.bike.setStatus(bikeId, "tagen");
-        
+
         // Starta en tidsintervall som uppdaterar bike.location varje minut
         this.interval = setInterval(async () => {
-            let city = bikeCity[0].city;
-            // Centrumkoordinater för cirkeln
-            let citys = [
-                {"stockholm": { latitude: 59.338758, longitude: 18.052715 }}, 
-                { "malmö": { latitude: 55.586533, longitude: 13.018350} },
-                { "göteborg": {latitude: 57.700993, longitude:11.990799}} 
-            ];
 
-            city = city.toString();
+            let getLocation = await this.bikeModels.getBikeById(this.bikeId);
 
-            let fCity = citys.filter(x => city in x)[0][city];
-            var items = Array(10, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000, 1100, 1200, 1300, 1400, 1500);
-            var item = items[Math.floor(Math.random() * items.length)];
-         
-            // Använd randomLocation.getRandomLocation() för att generera slumpmässiga koordinater inom en radius på 5 km från staden
-            const { latitude, longitude } = randomLocation.randomCircumferencePoint(
-                fCity,
-                item
-            );
+            let randomBikeSpeed = Math.floor(Math.random() * 26);
+            await this.bike.updateSpeed(bikeId, randomBikeSpeed);
+
+            let tempKo = getLocation[0].m_location.split(", ");
+            // Definiera startkoordinaterna
+            let startLat = parseFloat(tempKo[0]);
+            let startLng = parseFloat(tempKo[1]);
+
+            // Räkna ut förflyttningen i km
+            let speed = Number(randomBikeSpeed); // km/h
+            let time = 1; // minuter
+            let distance = speed * (time / 60); // km
+
+            // Slumpa riktning (0 = norr, 1 = öster, 2 = söder, 3 = väster)
+            let direction = Math.floor(Math.random() * 4);
+
+            // Räkna ut vinkeln för förflyttningen i radianer
+            let bearing;
+            switch (direction) {
+                case 0:
+                    bearing = 0; // norr
+                    break;
+                case 1:
+                    bearing = 90; // öster
+                    break;
+                case 2:
+                    bearing = 180; // söder
+                    break;
+                case 3:
+                    bearing = 270; // väster
+                    break;
+                default:
+                    bearing = 0;
+            }
+
+            let bearingRad = bearing * (Math.PI / 180);
+
+            // Räkna ut den nya latituden och longituden
+            let endLat = startLat + (distance * Math.cos(bearingRad)) / 111.32;
+            let endLng = startLng + (distance * Math.sin(bearingRad)) / (111.32 * Math.cos(startLat));
+
             // Hämtar cykel batteri nivå
             let newBattery = await this.bikeModels.getBatteriLevel(bikeId);
             // Ändra batteri -1
             newBattery = newBattery[0].charging_status - 1;
-            console.log(newBattery);
+            //console.log(newBattery);
             await this.bikeModels.updateBatteriLevel(bikeId, newBattery);
 
             // Uppdatera bike.location med de nya koordinaterna till bike_table databasen.
-            let koordinater = `${latitude}, ${longitude}`;
+            let koordinater = `${endLat}, ${endLng}`;
             await this.bike.setLocation(bikeId, koordinater);
-            let randomBikeSpeed = Math.floor(Math.random() * 26);
-            await this.bike.updateSpeed(bikeId, randomBikeSpeed);
             //console.log(koordinater)
         }, 15000)
 
@@ -141,7 +165,7 @@ module.exports = class BikeRide {
    * @returns {object} - A log of the bike ride, containing the bike id, start location, start time, end location, end time, user id, and cost.
    * @throws {Error} - In case the database operation fails, an error is thrown.
    */
-    async stopBikeRideByBikeId(rideLog) {
+    async stopBikeRide(rideLog) {
         this.endTime = new Date();
         let endLocation = await this.bike.getLocation(rideLog.bike_id);
        // console.log(endLocation);

@@ -58,7 +58,7 @@ for (let i = 0; i < chargers.length; i++) {
         //console.log(`cykeln på ${coordinate.latitude}, ${coordinate.longitude} är inom en charger zon`);
         // Här borde man starta laddningen!
         await bikeModels.setParking(bikeId, "laddnings station")
-        await bikeModels.updateBatteriLevel(bikeId, 100)
+        await bikeModels.updateBatteriLevel(bikeId, "100")
 
         return 0;
     }
