@@ -1,12 +1,66 @@
-CREATE TABLE `bike_table` (
-  `bike_id` int NOT NULL,
+CREATE DATABASE IF NOT EXISTS vteam;
+use vteam;
+DROP TABLE IF EXISTS bike_rides, users, bikes, parkinglocations;
+
+CREATE TABLE `bikes` (
+  `bike_id` int NOT NULL AUTO_INCREMENT,
   `city` varchar(30) NOT NULL,
-  `parking` varchar(10) DEFAULT NULL,
+  `parking` varchar(50) DEFAULT NULL,
   `charging_status` varchar(30) DEFAULT NULL,
   `available_status` varchar(20) NOT NULL,
-  `m_location` varchar(30) DEFAULT NULL,
+  `m_location` varchar(50) DEFAULT NULL,
   `speed` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`bike_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE `users` (
+  `user_id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(30) NOT NULL,
+  `u_type` varchar(10) NOT NULL,
+  `u_password` varchar(30) NOT NULL,
+  `firstname` varchar(30) NOT NULL,
+  `lastname` varchar(45) NOT NULL,
+  `adress` varchar(45) DEFAULT NULL,
+  `postcode` varchar(8) DEFAULT NULL,
+  `city` varchar(30) DEFAULT NULL,
+  `saldo` int DEFAULT NULL,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `user_id_UNIQUE` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COMMENT='Table for the users';
+
+CREATE TABLE `bike_rides` (
+  `ride_id` int NOT NULL AUTO_INCREMENT,
+  `bike_id` int,
+  `user_id` int,
+  `start_position` varchar(50) DEFAULT NULL,
+  `end_position` varchar(50) DEFAULT NULL,
+  `cost` int NOT NULL,
+  `start_time` datetime NOT NULL,
+  `end_time` datetime NOT NULL,
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE SET NULL,
+  FOREIGN KEY (`bike_id`) REFERENCES `bikes`(`bike_id`) ON DELETE SET NULL,
+  PRIMARY KEY (`ride_id`)
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*
+CREATE TABLE `parkinglocations` (
+  `pl_id` int NOT NULL AUTO_INCREMENT,
+  `chargers` int DEFAULT NULL,
+  `parkingZones` int DEFAULT NULL,
+  PRIMARY KEY (`pl_id`),
+  UNIQUE KEY `pl_id_UNIQUE` (`pl_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+*/
+/*
+CREATE TABLE `parking_table` (
+  `parking_id` varchar(10) NOT NULL,
+  `parking_type` varchar(20) DEFAULT NULL,
+  `charging_station` varchar(10) DEFAULT NULL,
+  `city` varchar(30) NOT NULL,
+  `latitude` varchar(20) DEFAULT NULL,
+  `longitude` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`parking_id`),
+  KEY `city_idx` (`city`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 CREATE TABLE `bike_parking` (
@@ -20,15 +74,16 @@ CREATE TABLE `bike_parking` (
   CONSTRAINT `id_b` FOREIGN KEY (`id_b`) REFERENCES `bike_table` (`bike_id`),
   CONSTRAINT `park_id` FOREIGN KEY (`park_id`) REFERENCES `parking_table` (`parking_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+*/
+/*
 
-CREATE TABLE `bike_ride_table` (
-  `ride_id` int NOT NULL,
-  `start_position` varchar(10) DEFAULT NULL,
-  `end_position` varchar(10) DEFAULT NULL,
-  `cost` int NOT NULL,
-  `start_time` datetime NOT NULL,
-  `end_time` datetime NOT NULL,
-  PRIMARY KEY (`ride_id`)
+/*
+CREATE TABLE `location_table` (
+  `location_id` int NOT NULL,
+  `location_name` varchar(30) NOT NULL,
+  `latitude` varchar(20) DEFAULT NULL,
+  `longitude` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`location_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 CREATE TABLE `bikelocation` (
@@ -55,51 +110,10 @@ CREATE TABLE `bikeride` (
   CONSTRAINT `id_bikeride` FOREIGN KEY (`id_bikeride`) REFERENCES `bike_ride_table` (`ride_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
-CREATE TABLE `location_table` (
-  `location_id` int NOT NULL,
-  `location_name` varchar(30) NOT NULL,
-  `latitude` varchar(20) DEFAULT NULL,
-  `longitude` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`location_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
-CREATE TABLE `parking_table` (
-  `parking_id` varchar(10) NOT NULL,
-  `parking_type` varchar(20) DEFAULT NULL,
-  `charging_station` varchar(10) DEFAULT NULL,
-  `city` varchar(30) NOT NULL,
-  `latitude` varchar(20) DEFAULT NULL,
-  `longitude` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`parking_id`),
-  KEY `city_idx` (`city`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+*/
 
-CREATE TABLE `parkinglocation` (
-  `pl_id` int NOT NULL AUTO_INCREMENT,
-  `p_id` varchar(10) DEFAULT NULL,
-  `loc_id` int DEFAULT NULL,
-  PRIMARY KEY (`pl_id`),
-  UNIQUE KEY `pl_id_UNIQUE` (`pl_id`),
-  KEY `p_id_idx` (`p_id`),
-  KEY `l_id_idx` (`loc_id`),
-  CONSTRAINT `loc_id` FOREIGN KEY (`loc_id`) REFERENCES `location_table` (`location_id`),
-  CONSTRAINT `p_id` FOREIGN KEY (`p_id`) REFERENCES `parking_table` (`parking_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
-CREATE TABLE `user_table` (
-  `user_id` int NOT NULL,
-  `username` varchar(30) NOT NULL,
-  `u_type` varchar(10) NOT NULL,
-  `u_password` varchar(30) NOT NULL,
-  `firstname` varchar(30) NOT NULL,
-  `lastname` varchar(45) NOT NULL,
-  `adress` varchar(45) DEFAULT NULL,
-  `postcode` varchar(8) DEFAULT NULL,
-  `city` varchar(30) DEFAULT NULL,
-  `saldo` int DEFAULT NULL,
-  PRIMARY KEY (`user_id`),
-  UNIQUE KEY `user_id_UNIQUE` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COMMENT='Table for the users';
+/*
 CREATE ALGORITHM=UNDEFINED DEFINER=`user`@`localhost` SQL SECURITY DEFINER VIEW `vteam`.`parking_bike` AS select `bp`.`id_b` AS `id_b`,`bp`.`park_id` AS `park_id`,`p`.`city` AS `city`,`b`.`parking` AS `parking`,`b`.`charging_status` AS `charging_status`,`b`.`available_status` AS `available_status` from ((`vteam`.`bike_parking` `bp` left outer join `vteam`.`parking_table` `p` on((`bp`.`park_id` = `p`.`parking_id`))) left outer join `vteam`.`bike_table` `b` on((`bp`.`id_b` = `b`.`bike_id`))) order by `p`.`city`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`user`@`localhost` SQL SECURITY DEFINER VIEW `vteam`.`acceptable_parking` AS select `vteam`.`parking_bike`.`park_id` AS `park_id`,`vteam`.`parking_bike`.`id_b` AS `id_b`,`vteam`.`parking_bike`.`available_status` AS `available_status`,count(`vteam`.`parking_bike`.`id_b`) AS `Antal` from `vteam`.`parking_bike` where (`vteam`.`parking_bike`.`available_status` = 'acceptable');
@@ -149,3 +163,4 @@ WHERE
 bike_id = bike;
 END$$
 DELIMITER ;
+*/

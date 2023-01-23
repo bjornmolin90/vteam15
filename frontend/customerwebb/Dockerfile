@@ -1,7 +1,13 @@
 FROM node:14
 
+WORKDIR /frontend
+
+RUN npx create-react-app customerwebb
+
 WORKDIR /frontend/customerwebb
 
-RUN npm install
+RUN npm install react-dom react-router-dom bootstrap react-bootstrap react-hook-form
 
-ENTRYPOINT [ "npm", "start" ]
+RUN cp package.json ..
+
+ENTRYPOINT [ "bash", "start.bash" ]

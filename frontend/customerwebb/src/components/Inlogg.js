@@ -1,7 +1,10 @@
 import React from 'react';
 import {useForm} from 'react-hook-form';
 import '../style/Form.css';
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5edb2f61a63de0fcf27672e5e6621d1e8203e524
 //install: npm install react-hook-form
 let counter = 0;
 function Inlogg(){

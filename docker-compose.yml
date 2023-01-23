@@ -5,61 +5,77 @@ networks:
 
 services:
     server:
-        image: "bjmo21/server:1.0"
         container_name: "server"
+        build:
+            context: ./backend
+            dockerfile: Dockerfile
         ports: 
             - "1337:1337"
         networks:
             dbwebb:
         volumes:
-            - ./backend/index:/server/index
+            - ./backend:/server
+            - /server/node_modules/
 
     adminwebb:
-        image: "bjmo21/adminwebb:1.0"
         container_name: "adminwebb"
+        build:
+            context: ./frontend/adminwebb
+            dockerfile: Dockerfile
         ports: 
             - "1338:3000"
         networks:
             dbwebb:
         volumes:
             - ./frontend/adminwebb:/frontend/adminwebb
+            - /frontend/adminwebb/node_modules/
         environment:
             - WATCHPACK_POLLING=true
 
     customermobile:
-        image: "bjmo21/customermobile:1.0"
         container_name: "customermobile"
+        build:
+            context: ./frontend/customermobile
+            dockerfile: Dockerfile
         ports: 
             - "1339:3000"
         networks:
             dbwebb:
         volumes:
             - ./frontend/customermobile:/frontend/customermobile
+            - /frontend/customermobile/node_modules/
         environment:
             - WATCHPACK_POLLING=true
 
     customerwebb:
-        image: "bjmo21/customerwebb:1.0"
         container_name: "customerwebb"
+        build:
+            context: ./frontend/customerwebb
+            dockerfile: Dockerfile
         ports: 
             - "1340:3000"
         networks:
             dbwebb:
         volumes:
             - ./frontend/customerwebb:/frontend/customerwebb
+            - /frontend/customerwebb/node_modules/
         environment:
             - WATCHPACK_POLLING=true
 
     database:
         image: "mysql:latest"
+        restart: always
+        command: --default-authentication-plugin=mysql_native_password
         container_name: mysql
         volumes:
-            - mysql_vol:/var/lib/mysql
+            - db_vol:/var/lib/mysql
+            - ./db/:/docker-entrypoint-initdb.d/
         ports:
-            - "3307:3306"
+            - "3308:3306"
         networks:
             dbwebb:
         environment:
-            MYSQL_ALLOW_EMPTY_PASSWORD: true
+            MYSQL_ROOT_PASSWORD: pass
+        
 volumes:
-    mysql_vol:
+    db_vol:
