@@ -1,5 +1,4 @@
 const User = require("./../services/userService.js");
-
 const getUserByIdController = async function (req, res, next) {
 
     let id = req.params.id;

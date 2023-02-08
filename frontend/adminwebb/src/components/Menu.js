@@ -1,3 +1,5 @@
+const localStorageValue = localStorage.getItem("loggedIn");
+
 export const Menu = [
     {
         title: 'Home',
@@ -14,14 +16,16 @@ export const Menu = [
         url: '/registera',
         cName: 'nav-links'
     },
-    {
-        title: 'Alla kunder',
-        url: '/customers',
-        cName: 'nav-links'
-    },
-    {
-        title: 'Elsparkcyklar',
-        url: '/elscooters',
-        cName: 'nav-links'
-    }
-]
+    ...(localStorageValue === 'true'
+        ? [{
+            title: 'Alla kunder',
+            url: '/customers',
+            cName: 'nav-links'
+        },
+        {
+            title: 'Elsparkcyklar',
+            url: '/elscooters',
+            cName: 'nav-links'
+        }]
+        : [])
+];

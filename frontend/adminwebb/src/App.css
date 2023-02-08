@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.login-button {
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
