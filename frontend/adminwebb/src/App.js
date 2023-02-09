@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-
+import fetchModel from './models/model';
 import Navbar from './components/Navbar';
 import Router from "./components/Routes";
 
+function App() {
+  let [content, setContent] = useState("")
 
+  useEffect(() => {
+    (async () => {
+      let fetch = await fetchModel.fetchResult()
+      setContent(fetch)
+        
+    })();
+  }, []);
 
-export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   useEffect(() => {
   const localStorageValue = localStorage.getItem("loggedIn");
@@ -38,6 +46,9 @@ export default function App() {
       )}
       <Navbar />
       <Router />
+        {content.idtest_table}
     </div>
   );
 }
+
+export default App;
