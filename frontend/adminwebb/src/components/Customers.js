@@ -9,6 +9,7 @@ function Customers(){
         (async () => {
             const allUsers = await fetching.customers();
             setUsers(allUsers);
+            console.log(setUsers(allUsers))
         })();
     }, []);
     return (

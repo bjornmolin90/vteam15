@@ -1,11 +1,7 @@
 import React from 'react';
 import { Menu } from './Menu';
 import '../style/Navbar.css';
-<<<<<<< HEAD
 
-=======
->>>>>>> 5edb2f61a63de0fcf27672e5e6621d1e8203e524
-  
 class Navbar extends React.Component {
     state = { clicked: false }
 

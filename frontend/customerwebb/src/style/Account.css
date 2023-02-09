@@ -1,0 +1,91 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+}
+
+.form--manual {
+    display: flex;
+    gap: 1em;
+    flex-direction: column;
+    width: 40vw;
+    margin: auto;
+    margin-top: 2em;
+    background-color: rgb(235, 242, 247);
+    border-radius: 10px;
+    padding: 2.5em;
+}
+
+.doublediv {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.doublediv div {
+    width: 49%;
+}
+
+.form--div {
+    width: 100%;
+}
+
+input {
+    width: 100%;
+    padding: 0.4em;
+    border-radius: 0.5em;
+    border-color: lightgrey;
+    border-width: thin;
+    font-size: 15px;
+    color: black;
+}
+
+.submitButton {
+    padding: 1em 3em;
+    background-color: rgb(57, 77, 149);
+    border-radius: 10px;
+    margin-top: 2em;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 400;
+}
+.check-balance{
+    align-items: center;
+    margin-top: 5em;
+    padding: 1em;
+}
+
+h3 {
+    display: inline-block;
+    text-align: left;
+    padding: 1em;
+    font-size: 20px;
+}
+
+.saldo input {
+    width: 45%
+}
+
+.saldo {
+    padding: 0.7em;
+}
+
+h4 {
+    padding: 0.6em;
+    font-size: 20px;
+}
+
+.form--manual p {
+    padding-top: 0.2em;
+    padding-bottom: 1em;
+    font-size: 16px;
+}
+
+h5 {
+    padding: 0.3em;
+    font-size: 15px;
+}
