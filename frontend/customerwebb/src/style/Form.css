@@ -3,7 +3,7 @@ form {
     justify-content: center;
     gap: 1em;
     flex-direction: column;
-    width: 22vw;
+    width: 23vw;
     margin: auto;
     margin-top: 5.5em;
     background-color: rgb(235, 242, 247);
@@ -29,7 +29,7 @@ label p {
     border: none;
     cursor: pointer;
     font-size: 16px;
-    width: 100%;
+    width: 75%;
     color: #fff;
 }
 
@@ -39,4 +39,5 @@ label input {
     border-color: lightgrey;
     border-width: thin;
     font-size: 15px;
+    width: 75%
 }
