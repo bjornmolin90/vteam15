@@ -6,11 +6,11 @@ export const Menu = [
         url: '/',
         cName: 'nav-links'
     },
-    {
+    ...(localStorageValue === 'true'
+    ? [{
         title: 'Hyr en cykel',
         url: '/rent',
         cName: 'nav-links'
-    },
-    ...(localStorageValue === 'true'
-        )
+    }]
+    : [])
 ];
