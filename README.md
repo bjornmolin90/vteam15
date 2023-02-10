@@ -27,3 +27,24 @@ Servern som finns i mappen [Backend](https://github.com/bjornmolin90/vteam15/tre
 - [Services](https://github.com/bjornmolin90/vteam15/tree/dev/backend/services) består av olika metoder och här skickar man förfrågningar till databasen med hjälp av models, i services innehåller även bike-intelligensen i mappen [bikeProgram](https://github.com/bjornmolin90/vteam15/tree/dev/backend/services/bikeProgram).
 - I [models](https://github.com/bjornmolin90/vteam15/tree/dev/backend/models) skrivs databasförfrågningar, syftet är att skilja vanlig kod från databaskod här. 
 - [Config](https://github.com/bjornmolin90/vteam15/tree/dev/backend/config) består av projektkonfigurationer, t.ex. användarnamn och lösenord till databasen.
+
+## Api dokumentation
+
+Metod | Endpoint | Beskrivning | Exempel på POST & PUT
+---|---|---|---
+GET | /api/v01/bike | Hämtar information om alla registrerade cyklar. | -
+GET | /api/v01/bike/{id} | Hämtar information om en cykel med specificerat ID. | -
+POST | /api/v01/bike | Registrerar en ny cykel i systemet. | Json - {"city": "stockholm", "parking": "on-street", "charging_status":"100", "available_status":"ledig", "m_location": "59.338758, 18.052715", "speed": "0"}
+DELETE | /api/v01/bike | Tar bort alla registrerade cyklar. | -
+DELETE | /api/v01/bike/{id} | Tar bort en cykel med specificerat ID. | -
+GET | /api/v01/city/{city} | Hämtar information om alla cyklar och laddstationer i en viss stad. | -
+GET | /api/v01/bikeride/bike/{id} | Hämtar alla cykelturer för en specificerad cykel. | -
+GET | /api/v01/bikeride/user/{id} | Hämtar alla cykelturer för en specificerad användare. | -
+GET | /api/v01/bikeride | Hämtar information om alla registrerade cykelturer. | -
+POST | /api/v01/bikeride | Startar en ny cykeltur i systemet. | Json - {"bikeId":7, "userId":1}
+PUT | /api/v01/bikeRide/stop | Avslutar och registrerar en pågående cykeltur. | Json - {"bike_id": 7,"startTime": "2023-01-03T15:54:32.788Z","startLocation": "59.42755469191417, 18.080686541663738","user_id": 1}
+GET | /api/v01/user/{id} | Hämtar information om en specificerad användare. | -
+GET | /api/v01/user | Hämtar information om alla registrerade användare. | -
+POST | /api/v01/user | Registrerar en ny användare i systemet. | Json - {"username": "username","u_type": "kund","u_password": "123","firstname": "förnamn","lastname": "efternamn","adress": "adress 1a","postcode": "31123","city": "Stockholm","saldo": 1000}
+DELETE | /api/v01/user/ | Tar bort alla registrerade användare. | -
+

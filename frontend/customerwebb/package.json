@@ -10,8 +10,13 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
     "react-dom": "^18.2.0",
+<<<<<<< HEAD
     "react-hook-form": "^7.43.0",
     "react-router-dom": "^6.8.0",
+=======
+    "react-hook-form": "^7.42.1",
+    "react-router-dom": "^6.7.0",
+>>>>>>> 6af03908d75f1d386808c5a589b1c623644fde5e
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
