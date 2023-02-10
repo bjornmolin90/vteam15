@@ -1,29 +1,54 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-
-
+import fetchModel from './models/model';
 import Navbar from './components/Navbar';
 import Router from "./components/Routes";
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import { GoogleLogin } from '@react-oauth/google';
 
-export default function App() {
-  const [login, setLogin] = useState();
-  const clientId = '1065073167702-jdtotil3acn7693leg7tsl4fs66p8cba.apps.googleusercontent.com';
+function App() {
+  let [content, setContent] = useState("")
+
+  useEffect(() => {
+    (async () => {
+      let fetch = await fetchModel.fetchResult()
+      setContent(fetch)
+        
+    })();
+  }, []);
+
+  const [loggedIn, setLoggedIn] = useState(false);
+  useEffect(() => {
+  const localStorageValue = localStorage.getItem("loggedIn");
+  if (localStorageValue === "true") {
+    setLoggedIn(true);
+  }
+}, []);
+  const handleLogin = () => {
+    setLoggedIn(true);
+    localStorage.setItem("loggedIn", true);
+    window.location.href = "http://localhost:1337/login";
+  };
+
+  const handleLogout = () => {
+    setLoggedIn(false);
+    localStorage.removeItem("loggedIn");
+    window.location.href = "http://localhost:1337/logout";
+  };
   return (
     <div className="App">
-      <GoogleOAuthProvider clientId="1065073167702-jdtotil3acn7693leg7tsl4fs66p8cba.apps.googleusercontent.com">
-        <GoogleLogin
-          onSuccess={credentialResponse => {
-            console.log(credentialResponse);
-            setLogin(true)
-          }}
-          onError={() => {
-            console.log('Login Failed');
-          }}
-        />
-      </GoogleOAuthProvider>
-      <><Navbar /><Router /></>
+      {loggedIn ? (
+        <button className="login-button" onClick={handleLogout}>
+          Logga ut
+        </button>
+      ) : (
+        <button className="login-button" onClick={handleLogin}>
+          Logga in med Google
+        </button>
+      )}
+      <Navbar />
+      <Router />
+        {content.idtest_table}
     </div>
   );
 }
+
+export default App;

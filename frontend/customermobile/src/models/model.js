@@ -1,9 +1,11 @@
 const fetching = {
     fetchResult: async function fetchResult() {
-        const response = await fetch(`http://localhost:1337`);
+        const response = await fetch(`http://localhost:1337/api/v01/user`, {
+            credentials: 'include'
+        });
         const result = await response.json();
         console.log(result)
-        
+
         return result[0]
     }
 };
