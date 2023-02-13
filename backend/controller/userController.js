@@ -35,6 +35,7 @@ const createUserController = async function (req, res, next) {
 
 const deleteUserController = async function (req, res, next) {
     try {
+        console.log("fel!!");
         await User.deleteAllUsers();
         res.json("deleted all");
     } catch (error) {
@@ -42,4 +43,15 @@ const deleteUserController = async function (req, res, next) {
     }
 }
 
-module.exports = { getUserByIdController, getAllUsersController, createUserController, deleteUserController }
+const deleteUserByIdController = async function (req, res, next) {
+    try {
+        let userId = req.params.id;
+        //console.log(userId);
+        await User.deleteUserById(userId);
+        res.json(userId);
+    } catch (error) {
+        res.json(error);
+    }
+}
+
+module.exports = { deleteUserByIdController, getUserByIdController, getAllUsersController, createUserController, deleteUserController }

@@ -9,7 +9,9 @@ router.get('/:id', oauth.oauthCheck, userController.getUserByIdController);
 router.get('/', oauth.oauthCheck, userController.getAllUsersController);
 // skapar en ny user
 router.post('/', userController.createUserController);
-// tar bort en user
+// tar bort alla users
 router.delete('/', userController.deleteUserController);
+// Tar bort en user med hjälp av userId
+router.delete('/:id', userController.deleteUserByIdController);
 
 module.exports = router;

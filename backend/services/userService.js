@@ -50,6 +50,14 @@ const getAllUsers = async function() {
         }
     }
 
+const deleteUserById = async function (id_) {
+    try {
+        return await userModels.deleteUser(id_);
+    } catch (error) {
+        return error;
+    }
+}
+
 const deleteAllUsers = async function() {
         try {
             return await userModels.deleteAllUsers();        
@@ -58,4 +66,4 @@ const deleteAllUsers = async function() {
         }
     }
 
-module.exports = { deleteAllUsers, getAllUsers, getUserById, createUser }
+module.exports = { deleteUserById, deleteAllUsers, getAllUsers, getUserById, createUser }
