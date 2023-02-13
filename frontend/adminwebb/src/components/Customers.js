@@ -11,12 +11,13 @@ function Customers(){
             setUsers(allUsers);
         })();
     }, []);
+    console.log(users)
     return (
         <main>
         {
-        users instanceof Array ? users.map((user, key) => <p key={user.user_id}>{user.username}</p>)
+        users instanceof Array ? users.map((user, key) => <button key={user.user_id}>{user.username}</button>)
             :
-        <p>""</p>
+        <p></p>
         }
         </main>
     )

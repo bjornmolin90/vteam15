@@ -25,13 +25,13 @@ function App() {
   const handleLogin = () => {
     setLoggedIn(true);
     localStorage.setItem("loggedIn", true);
-    window.location.href = "http://localhost:1337/login";
+    window.location.href = "http://localhost:1337/login?origin=1340";
   };
 
   const handleLogout = () => {
     setLoggedIn(false);
     localStorage.removeItem("loggedIn");
-    window.location.href = "http://localhost:1337/logout";
+    window.location.href = "http://localhost:1337/logout?origin=1340";
   };
   return (
     <div className="App">
