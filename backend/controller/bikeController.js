@@ -1,9 +1,9 @@
-const Bike = require("../services/bikeProgram/bike.js");
+
 const bikeService = require("../services/bikeService");
 
 const createBikeController = async function (req, res, next) {
 
-   console.log(req.body);
+    console.log(req.body);
     try {
         let createdBike = await bikeService.createBike(req.body);
         res.json(createdBike);
@@ -60,7 +60,7 @@ const getAllBikesInACityController = async function (req, res, next) {
         res.json(getAllBikesInACity);
     } catch (error) {
         res.json(error)
-    }    
+    }
 }
 
 module.exports = { deleteBikeByIdController, deleteAllBikesController, createBikeController, getBikeController, getAllBikesController, getAllBikesInACityController }

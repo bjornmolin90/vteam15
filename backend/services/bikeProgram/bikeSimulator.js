@@ -6,7 +6,7 @@ const bikeModels = require("../../models/bike");
 
 const startSimulator = async function () {
 
-    await bikeModels.deleteAllTables();    
+    await bikeModels.deleteAllTables();
 
     for (let i = 0; i < 1000; i++) {
         bikeService.createBike({
@@ -40,7 +40,7 @@ const startSimulator = async function () {
         })
         
     }*/
-    
+
     // skapar 1000 användare
     for (let i = 0; i < 1000; i++) {
         await User.createUser({
@@ -52,7 +52,7 @@ const startSimulator = async function () {
             "adress": "adress 1a",
             "postcode": "31123",
             "city": "Stockholm",
-            "saldo": 1000
+            "saldo": 1000,
         })
     }
     let allUsers = await User.getAllUsers()
@@ -69,11 +69,10 @@ const startSimulator = async function () {
                 "startLocation": temp[i].startLocation,
                 "user_id": temp[i].bike_id
             }
-         //   console.log(log);
+            //   console.log(log);
             await new BikeRide().stopBikeRide(log);
         }
     }, 120000);
-
 }
 
 module.exports = { startSimulator };

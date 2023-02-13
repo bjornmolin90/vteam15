@@ -1,3 +1,5 @@
+const localStorageValue = localStorage.getItem("loggedIn");
+
 export const Menu = [
     {
         title: 'Home',
@@ -14,7 +16,8 @@ export const Menu = [
         url: '/registera',
         cName: 'nav-links'
     },
-    {
+    ...(localStorageValue === 'true'
+    ? [{
         title: 'Dina resor',
         url: '/rides',
         cName: 'nav-links'
@@ -23,5 +26,6 @@ export const Menu = [
         title: 'Konto',
         url: '/account',
         cName: 'nav-links'
-    }
-]
+    }]
+    : [])
+];

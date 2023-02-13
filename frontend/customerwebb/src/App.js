@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState, useEffect } from "react";
 import "./App.css";
 import fetchModel from "./models/model";
@@ -26,3 +27,59 @@ function App() {
 }
 
 export default App;
+=======
+import React, { useState, useEffect } from 'react';
+import './App.css';
+import fetchModel from './models/model';
+import Navbar from './components/Navbar';
+import Router from "./components/Routes";
+
+function App() {
+  let [content, setContent] = useState("")
+
+  useEffect(() => {
+    (async () => {
+      let fetch = await fetchModel.fetchResult()
+      setContent(fetch)
+        
+    })();
+  }, []);
+
+  const [loggedIn, setLoggedIn] = useState(false);
+  useEffect(() => {
+  const localStorageValue = localStorage.getItem("loggedIn");
+  if (localStorageValue === "true") {
+    setLoggedIn(true);
+  }
+}, []);
+  const handleLogin = () => {
+    setLoggedIn(true);
+    localStorage.setItem("loggedIn", true);
+    window.location.href = "http://localhost:1337/login";
+  };
+
+  const handleLogout = () => {
+    setLoggedIn(false);
+    localStorage.removeItem("loggedIn");
+    window.location.href = "http://localhost:1337/logout";
+  };
+  return (
+    <div className="App">
+      {loggedIn ? (
+        <button className="login-button" onClick={handleLogout}>
+          Logga ut
+        </button>
+      ) : (
+        <button className="login-button" onClick={handleLogin}>
+          Logga in med Google
+        </button>
+      )}
+      <Navbar />
+      <Router />
+        {content.idtest_table}
+    </div>
+  );
+}
+
+export default App;
+>>>>>>> c75fb1c5c4f9d9f65bdd46cc8b4fc4317b457c38
