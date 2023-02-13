@@ -30,4 +30,9 @@ const deleteAllUsers = async function () {
     return results[0]
 }
 
-module.exports = { getUserById, createUser, getAllUsers, deleteAllUsers };
+const deleteUser = async function (id_) {
+    let sql = `DELETE FROM users WHERE user_id = ${id_};`;
+    await db.connection.promise().query(sql);
+}
+
+module.exports = { deleteUser ,getUserById, createUser, getAllUsers, deleteAllUsers };

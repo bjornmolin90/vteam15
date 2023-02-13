@@ -110,16 +110,10 @@ const setParking = async function (bikeId, parking) {
 const deleteAllTables = async function () {
     try {
         let sql = 'SET FOREIGN_KEY_CHECKS = 0; TRUNCATE TABLE bike_rides; TRUNCATE TABLE users; TRUNCATE TABLE bikes; SET FOREIGN_KEY_CHECKS = 1;';
- 
-       
         await db.connection.promise().query(sql)
-
-        //  console.log(results[0]); 
     } catch (error) {
         return error
     }
-
 }
-
 
 module.exports = {getBatteriLevel, setParking, deleteAllTables, getAllBikesInACity, deleteBikeById, updateBatteriLevel, getBikeById, createBike, getAllBikes, updateSpeed, getStatus, setStatus, deleteAllBikes, getLocation, setLocation };
