@@ -1,6 +1,6 @@
 CREATE DATABASE IF NOT EXISTS vteam;
 use vteam;
-DROP TABLE IF EXISTS bike_rides, users, bikes;
+DROP TABLE IF EXISTS transactions, accounts, bike_rides, users, bikes;
 
 CREATE TABLE `bikes` (
   `bike_id` int NOT NULL AUTO_INCREMENT,
@@ -41,5 +41,23 @@ CREATE TABLE `bike_rides` (
   FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE SET NULL,
   FOREIGN KEY (`bike_id`) REFERENCES `bikes`(`bike_id`) ON DELETE SET NULL,
   PRIMARY KEY (`ride_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
+CREATE TABLE `accounts` (
+  `account_id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT,
+  `monthly_transaction` TINYINT(1) NOT NULL DEFAULT 1, -- Boolean variabel för att indikera om användaren har en automatisk månatlig prenumeration, 1 är true.
+  `balance` DECIMAL(10,2) NOT NULL DEFAULT 0,
+  `card_number` VARCHAR(16) NOT NULL,
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE SET NULL,
+  PRIMARY KEY (account_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE `transactions` (
+  `transaction_id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT,
+  `payment_date` DATE NOT NULL,
+  `amount` DECIMAL(10,2) NOT NULL,
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE SET NULL,
+  PRIMARY KEY (transaction_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
