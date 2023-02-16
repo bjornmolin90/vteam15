@@ -23,7 +23,6 @@ CREATE TABLE `users` (
   `adress` varchar(45) DEFAULT NULL,
   `postcode` varchar(8) DEFAULT NULL,
   `city` varchar(30) DEFAULT NULL,
-  `saldo` int DEFAULT NULL,
   `u_email` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_id_UNIQUE` (`user_id`)
@@ -36,6 +35,7 @@ CREATE TABLE `bike_rides` (
   `start_position` varchar(50) DEFAULT NULL,
   `end_position` varchar(50) DEFAULT NULL,
   `cost` int NOT NULL,
+  `status` VARCHAR(20) DEFAULT 'unpaid',
   `start_time` datetime NOT NULL,
   `end_time` datetime NOT NULL,
   FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE SET NULL,
@@ -49,6 +49,7 @@ CREATE TABLE `accounts` (
   `monthly_transaction` TINYINT(1) NOT NULL DEFAULT 1, -- Boolean variabel för att indikera om användaren har en automatisk månatlig prenumeration, 1 är true.
   `balance` DECIMAL(10,2) NOT NULL DEFAULT 0,
   `card_number` VARCHAR(16) NOT NULL,
+  `csv` VARCHAR(16) NOT NULL,
   FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE SET NULL,
   PRIMARY KEY (account_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;

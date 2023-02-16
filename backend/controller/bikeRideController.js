@@ -13,7 +13,7 @@ const startBikeRideController = async function (req, res, next) {
 const stopBikeRideController = async function (req, res, next) {
 
     try {
-        let Bikeride = await new BikeRide().stopBikeRideByBikeId(req.body);
+        let Bikeride = await new BikeRide().stopBikeRide(req.body);
        // console.log(Bikeride)
         res.json(Bikeride);
     } catch (error) {

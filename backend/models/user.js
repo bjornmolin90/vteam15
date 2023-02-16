@@ -16,8 +16,8 @@ const getUserById = async function (id_) {
 
 const createUser = async function (data) {
     let sql = `
-    INSERT INTO users(userName, u_type, u_password, firstname, lastname, adress, postcode, city, saldo, u_email)
-    VALUES('${data.username}', '${data.u_type}', '${data.u_password}', '${data.firstname}', '${data.lastname}', '${data.adress}', '${data.postcode}', '${data.city}', ${data.saldo}, '${data.u_email}');`;
+    INSERT INTO users(userName, u_type, u_password, firstname, lastname, adress, postcode, city, u_email)
+    VALUES('${data.username}', '${data.u_type}', '${data.u_password}', '${data.firstname}', '${data.lastname}', '${data.adress}', '${data.postcode}', '${data.city}', '${data.u_email}');`;
     const results = await db.connection.promise().query(sql)
 
     return results[0]

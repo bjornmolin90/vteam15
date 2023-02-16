@@ -51,8 +51,7 @@ const startSimulator = async function () {
             "lastname": "efternamn",
             "adress": "adress 1a",
             "postcode": "31123",
-            "city": "Stockholm",
-            "saldo": 1000,
+            "city": "Stockholm"
         })
     }
     let allUsers = await User.getAllUsers()
