@@ -13,7 +13,6 @@ const getUserByIdController = async function (req, res, next) {
 }
 
 const getAllUsersController = async function (req, res, next) {
-
     try {
         let getUsers = await User.getAllUsers();
         res.json(getUsers);
@@ -35,7 +34,6 @@ const createUserController = async function (req, res, next) {
 
 const deleteUserController = async function (req, res, next) {
     try {
-        console.log("fel!!");
         await User.deleteAllUsers();
         res.json("deleted all");
     } catch (error) {

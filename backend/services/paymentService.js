@@ -1,4 +1,6 @@
 const paymentModels = require("../models/payment")
+const cron = require('node-cron');
+const cronJobs = {};
 
 // Hämta ett konto
 async function getAccount(user_id) {
@@ -38,10 +40,22 @@ async function executePayment(user_id) {
 }
 
 // Definiera en funktion som hanterar månatlig betalning
-async function handleMonthlyPayment() {
+async function handleMonthlyPayment(user_id, monthlyPayment) {
     // Koden för att hantera månatlig betalning här.
     try {
-        await paymentModels.handleMonthlyPayment()
+        if (monthlyPayment) {
+            await paymentModels.handleMonthlyPayment(user_id, monthlyPayment)
+            cronJobs[user_id] = cron.schedule('* * * * *', async () => {
+                console.log('CronJob 1 körs varje minut!');
+                console.log(user_id);
+                await paymentModels.addMoneyAndPayAuto(user_id)
+            })
+            return "Done"
+        }
+        // Stoppa cronJob med ID "job1"
+        await paymentModels.handleMonthlyPayment(user_id, monthlyPayment)
+        cronJobs[user_id].stop();
+        //await paymentModels.handleMonthlyPayment(user_id, monthlyPayment)
     } catch (error) {
         return error;
     }

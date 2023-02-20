@@ -3,7 +3,6 @@ const bikeService = require("../services/bikeService");
 
 const createBikeController = async function (req, res, next) {
 
-    console.log(req.body);
     try {
         let createdBike = await bikeService.createBike(req.body);
         res.json(createdBike);
@@ -47,7 +46,6 @@ const deleteAllBikesController = async function (req, res, next) {
 const deleteBikeByIdController = async function (req, res, next) {
     try {
         let deleteBike = await bikeService.deleteBikeById(req.params.id);
-        console.log(deleteBike);
         res.json(deleteBike);
     } catch (error) {
         res.json(error);

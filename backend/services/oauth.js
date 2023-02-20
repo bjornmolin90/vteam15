@@ -1,5 +1,5 @@
 const passport = require('passport');
-const { createUser } = require('../models/user');
+const { getUserByEmail, createUser } = require('../models/user');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 //const mysql = require('mysql');
 let con = require('./../config/db')
@@ -19,8 +19,10 @@ passport.use(new GoogleStrategy({
     let sql = `SELECT * FROM users WHERE u_email = '${profile.emails[0].value}'`;
     let result = await con.connection.promise().query(sql);
     result = result[0]
-
+    
     if (result.length > 0) {
+      let user_id = await getUserByEmail(profile.emails[0].value);
+      profile.user_id = user_id[0].user_id;
       console.log("Värdet finns redan i databasen och då loggas man in!");
       return cb(null, profile);
     } else {
@@ -39,6 +41,8 @@ passport.use(new GoogleStrategy({
         u_email: profile.emails[0].value
       }
       await createUser(values);
+      let user_id = await getUserByEmail(profile.emails[0].value);
+      profile.user_id = user_id[0].user_id;
       return cb(null, profile);
     }
 

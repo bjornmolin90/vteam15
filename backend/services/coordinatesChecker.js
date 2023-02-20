@@ -55,11 +55,9 @@ const isPointWithinArea = async function (coordinate, bikeId) {
 for (let i = 0; i < chargers.length; i++) {
  
     if (geolib.isPointWithinRadius(coordinate, chargers[i], Radius)) {
-        //console.log(`cykeln på ${coordinate.latitude}, ${coordinate.longitude} är inom en charger zon`);
-        // Här borde man starta laddningen!
         await bikeModels.setParking(bikeId, "laddnings station")
         await bikeModels.updateBatteriLevel(bikeId, "100")
-
+        // ingen extra avgift
         return 0;
     }
     if (geolib.isPointWithinRadius(coordinate, parkingZones[i], Radius)) {
@@ -69,7 +67,6 @@ for (let i = 0; i < chargers.length; i++) {
     }
 }
     // Extra avgift 20kr? inom det godkända området men inte på en parkeringsZon eller på en charger zon
-    //console.log(`cykeln på ${coordinate.latitude}, ${coordinate.longitude} är inte inom en parkerings/charger zon Extra taxa 20kr!`);
     return 20;
 }
 
