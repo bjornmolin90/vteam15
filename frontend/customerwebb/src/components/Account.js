@@ -26,18 +26,24 @@ function Account() {
             ) : (
                 <>
                     <div className='check-balance'>
-                        <h3>Saldo för detta konto: </h3>
-                        <p>500kr</p>
+                        <h4>Saldo för detta konto: </h4>
+                        <h5>500kr</h5>
                         <br></br>
                     </div>
                     <form className='form--manual'>
-                        <h4>Fyll på saldo </h4>
-                        <div className='saldo form--div'>
-                            <p>Belopp att lägga till:</p>
+                        <div className='add-balance'>
+                            <h4>Fyll på saldo </h4>
+                        </div>
+                        <div className='saldo--form--div'>
+                            <p className='balance'>Belopp att lägga till:</p>
                             <input type='number' name='' id='' placeholder='SEK' />
+                            <button type='submit' className='payButton'>
+                                Lägg till belopp
+                            </button>
                         </div>
                         <h4>Välj betalningsmetod</h4>
-                        <h5>Betala med kort</h5>
+                        <p className='pay'>Kortbetalning</p>
+                        <h3>Ange dina kortuppgifter</h3>
                         <div className='card form--div'>
                             <p>Kortnummer</p>
                             <input type='number' name='cardNum' id='cardNum' placeholder='1234 5678 9012 3456' />
@@ -56,6 +62,12 @@ function Account() {
                             <p>Namn på kort</p>
                             <input type='text' placeholder='A. Anderssons' />
                         </div>
+                        <button type='submit' className='cardButton'>
+                            Lägg till ett kontokort
+                        </button>
+                        <button type='submit' className='balanceButton'>
+                            Betala månadsvis
+                        </button>
                     </form>
                     <button type='submit' className='submitButton'>
                         Bekräfta och betala

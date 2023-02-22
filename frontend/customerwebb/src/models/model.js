@@ -1,10 +1,9 @@
 const fetching = {
     fetchResult: async function fetchResult() {
         const response = await fetch(`http://localhost:1337/api/v01/user`, {
-            credentials: 'include'
+            credentials: "include",
         });
         const result = await response.json();
-<<<<<<< HEAD
         //console.log(result);
 
         return result[0];
@@ -19,12 +18,6 @@ const fetching = {
             throw `Constellation with id of ${error} could not be found.`;
         }
     },
-=======
-        console.log(result)
-
-        return result[0]
-    }
->>>>>>> c75fb1c5c4f9d9f65bdd46cc8b4fc4317b457c38
 };
 
 export default fetching;
