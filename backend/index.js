@@ -19,9 +19,7 @@ const user = require('./routes/user');
 const bikeRide = require('./routes/bikeRide');
 const city = require('./routes/city');
 const locations = require('./routes/locations');
-
-// Start the bike status checker
-//bikeProgramStatus.startBikeProgram();
+const payment = require('./routes/payment');
 
 app.get("/simulation", (req, res) => {
     // Start the simulator adding bikes and user
@@ -43,7 +41,9 @@ app.use(require('express-session')({
 }));
 
 app.use(passport.session());
+
 let redirectUrl;
+
 // Öppnar google-oauth
 require("./services/oauth")
 
@@ -100,6 +100,7 @@ app.use('/api/v01/bikeride', bikeRide);
 app.use('/api/v01/user', user);
 app.use('/api/v01/city', city);
 app.use('/api/v01/locations', locations);
+app.use('/api/v01/payment', payment);
 
 // Start up server
 app.listen(port, () => console.log(`Example API listening on port ${port}!`));

@@ -7,7 +7,7 @@ const bikeModels = require("../../models/bike");
 const startSimulator = async function () {
 
     await bikeModels.deleteAllTables();
-
+    // skapar 1000 cyklar
     for (let i = 0; i < 1000; i++) {
         bikeService.createBike({
             "city": "stockholm",
@@ -17,42 +17,18 @@ const startSimulator = async function () {
             "m_location": "59.338758, 18.052715",
             "speed": "0"
         })
-    }/*
-    for (let i = 0; i < 333; i++) {
-        bikeService.createBike({
-            "city": "malmö",
-            "parking": "on-street",
-            "charging_status": "100",
-            "available_status": "ledig",
-            "m_location": "55.586533, 13.018350",
-            "speed": "0"
-        })
-        
     }
-    for (let i = 0; i < 334; i++) {
-        bikeService.createBike({
-            "city": "göteborg",
-            "parking": "on-street",
-            "charging_status": "100",
-            "available_status": "ledig",
-            "m_location": "57.700993 11.990799",
-            "speed": "0"
-        })
-        
-    }*/
-
     // skapar 1000 användare
     for (let i = 0; i < 1000; i++) {
         await User.createUser({
-            "username": "username",
+            "username": `user${i}`,
             "u_type": "kund",
             "u_password": "123",
             "firstname": "förnamn",
             "lastname": "efternamn",
             "adress": "adress 1a",
             "postcode": "31123",
-            "city": "Stockholm",
-            "saldo": 1000,
+            "city": "Stockholm"
         })
     }
     let allUsers = await User.getAllUsers()

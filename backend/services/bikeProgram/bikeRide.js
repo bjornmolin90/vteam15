@@ -1,4 +1,3 @@
-const randomLocation = require('random-location');
 const bikeRideModels = require("../../models/bikeride.js");
 const bikeModels = require('../../models/bike.js'); 
 const Bike = require("./bike");

@@ -47,4 +47,7 @@ GET | /api/v01/user/{id} | Hämtar information om en specificerad användare. | 
 GET | /api/v01/user | Hämtar information om alla registrerade användare. | -
 POST | /api/v01/user | Registrerar en ny användare i systemet. | Json - {"username": "username","u_type": "kund","u_password": "123","firstname": "förnamn","lastname": "efternamn","adress": "adress 1a","postcode": "31123","city": "Stockholm","saldo": 1000}
 DELETE | /api/v01/user/ | Tar bort alla registrerade användare. | -
-
+GET | /api/v01/payment | Hämtar användarens kontouppgifter. | -
+POST | /api/v01/payment | Lägger till konto. | Json - {"card_number": 12332112, "csv": 123}
+PUT | /api/v01/payment | Insättning av pengar. | Json - { "balance": 6000 }
+PUT | /api/v01/payment/monthly-payment | Automatisk betalning. | Json - { "monthlyPayment": false/true }
