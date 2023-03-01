@@ -5,9 +5,9 @@ const createBikeController = async function (req, res, next) {
 
     try {
         let createdBike = await bikeService.createBike(req.body);
-        res.json(createdBike);
+        res.status(201).json(createdBike);
     } catch (error) {
-        res.json(error);
+        res.status(500).json(error);
     }
 }
 
@@ -17,9 +17,9 @@ const getBikeController = async function (req, res, next) {
 
     try {
         let getBike = await bikeService.getBikeById(id);
-        res.json(getBike);
+        res.status(200).json(getBike);
     } catch (error) {
-        res.json(error);
+        res.status(500).json(error);
     }
 }
 
@@ -27,9 +27,9 @@ const getAllBikesController = async function (req, res, next) {
 
     try {
         let getBike = await bikeService.getAllBikes();
-        res.json(getBike);
+        res.status(200).json(getBike);
     } catch (error) {
-        res.json(error);
+        res.status(500).json(error);
     }
 }
 
@@ -37,27 +37,28 @@ const deleteAllBikesController = async function (req, res, next) {
     //  console.log(req.body.status);
     try {
         let getBike = await bikeService.deleteAllBikes();
-        res.json(getBike);
+        res.status(204).json(getBike);
     } catch (error) {
-        res.json(error);
+        res.status(500).json(error);
     }
 }
 
 const deleteBikeByIdController = async function (req, res, next) {
     try {
         let deleteBike = await bikeService.deleteBikeById(req.params.id);
-        res.json(deleteBike);
+        res.status(204).json(deleteBike);
     } catch (error) {
-        res.json(error);
+        res.status(500).json(error);
     }
 }
+
 const getAllBikesInACityController = async function (req, res, next) {
     try {
         let city = req.params.city;
         let getAllBikesInACity = await bikeService.getAllBikesInACity(city);
-        res.json(getAllBikesInACity);
+        res.status(200).json(getAllBikesInACity);
     } catch (error) {
-        res.json(error)
+        res.status(500).json(error)
     }
 }
 

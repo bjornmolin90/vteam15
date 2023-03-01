@@ -1,7 +1,7 @@
 const passport = require('passport');
 const { getUserByEmail, createUser } = require('../models/user');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-//const mysql = require('mysql');
+
 let con = require('./../config/db')
 
 passport.use(new GoogleStrategy({
@@ -13,13 +13,13 @@ passport.use(new GoogleStrategy({
   clientSecret: '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',
   callbackURL: 'http://localhost:1337/google/callback'
 },
-  async function (accessToken, refreshToken, profile, cb) {
-    //console.log(accessToken);
+  async function ( accessToken, refreshToken, profile, cb) {
     // kollar om google användare redan finns i databasen, om användare inte finns så skapas en ny 
+    console.log(profile);
     let sql = `SELECT * FROM users WHERE u_email = '${profile.emails[0].value}'`;
     let result = await con.connection.promise().query(sql);
     result = result[0]
-    
+
     if (result.length > 0) {
       let user_id = await getUserByEmail(profile.emails[0].value);
       profile.user_id = user_id[0].user_id;
@@ -37,7 +37,6 @@ passport.use(new GoogleStrategy({
         adress: "a",
         postcode: "444",
         city: "a",
-        saldo: 0,
         u_email: profile.emails[0].value
       }
       await createUser(values);

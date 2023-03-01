@@ -42,21 +42,33 @@ app.use(require('express-session')({
 
 app.use(passport.session());
 
-let redirectUrl;
-
+//let redirectUrl;
 // Öppnar google-oauth
 require("./services/oauth")
 
 // google login för kund
 app.get('/login', (req, res, next) => {
-    redirectUrl = req.query.origin
-    next()
-}, passport.authenticate('google', { scope: ['profile', 'email'] }));
+    let redirectUrl = req.query.origin;
+    passport.authenticate('google', {
+        scope: ['profile', 'email'],
+        state: redirectUrl
+    })(req, res, next);
+});
 
+let mysql = require('./config/db')
 // callback för kund
 app.get('/google/callback', passport.authenticate('google', { failureRedirect: 'http://localhost:1338' }),
-    (req, res) => {
-        console.log(redirectUrl);
+   async (req, res) => {
+        let redirectUrl = req.query.state;
+        // Här sätter man user till admin om redirectUrl är 1338.
+        if (redirectUrl == "1338") {
+            let sql = `UPDATE users SET u_type = 'admin' WHERE user_id = ${req.user.user_id};`;
+            await mysql.connection.promise().query(sql)
+        }
+        
+        // spara session att det är admin eller user
+        req.user.user_type = redirectUrl == ("1339"||"1340") ? "kund": "admin";
+        // ------------------------------------------------------
         switch (redirectUrl) {
             case '1338':
                 res.redirect("http://localhost:1338");
