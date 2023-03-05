@@ -68,6 +68,7 @@ app.get('/google/callback', passport.authenticate('google', { failureRedirect: '
         
         // spara session att det är admin eller user
         req.user.user_type = redirectUrl == ("1339"||"1340") ? "kund": "admin";
+        req.user.origin = redirectUrl;
         // ------------------------------------------------------
         switch (redirectUrl) {
             case '1338':
@@ -87,8 +88,8 @@ app.get('/google/callback', passport.authenticate('google', { failureRedirect: '
 );
 
 app.get('/logout', (req, res) => {
+    let redirectUrl = req.user.origin
     req.logout(() => {
-        redirectUrl = req.query.origin
         console.log(redirectUrl);
         switch (redirectUrl) {
             case '1338':
