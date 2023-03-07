@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bikeRideController = require("../controller/bikeRideController.js")
-
+const oauth = require("../services/oauthCheck");
 // hämtar alla rides
 router.get('/', bikeRideController.getAllBikeRidesController);
 
@@ -15,7 +15,7 @@ router.get('/user/:id', bikeRideController.getAllBikeridesByUserIdController);
 router.post('/', bikeRideController.startBikeRideController);
 
 // stoppar bikeRide
-router.put('/stop', bikeRideController.stopBikeRideController);
+router.put('/stop', oauth.oauthCheck, bikeRideController.stopBikeRideController);
 
 
 module.exports = router;
