@@ -35,6 +35,9 @@ function App() {
   };
   return (
     <div className="App">
+      <Navbar />
+      <Router />
+        {content.idtest_table}
       {loggedIn ? (
         <button className="login-button" onClick={handleLogout}>
           Logga ut
@@ -44,9 +47,6 @@ function App() {
           Logga in med Google
         </button>
       )}
-      <Navbar />
-      <Router />
-        {content.idtest_table}
     </div>
   );
 }
