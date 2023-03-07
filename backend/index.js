@@ -56,7 +56,6 @@ app.get('/login', (req, res, next) => {
 // callback för kund
 app.get('/google/callback', passport.authenticate('google', { failureRedirect: 'http://localhost:1338' }),
     (req, res) => {
-        console.log(redirectUrl);
         switch (redirectUrl) {
             case '1338':
                 res.redirect("http://localhost:1338");

@@ -8,7 +8,8 @@ function Rent(){
     const [filteredBikes, setFilteredBikes] = useState([]);
     const [data2, setData2] = useState([]);
     const [bikeId, setBikeId] = useState('');
-    const [userId, setUserId] = useState('');
+    const [startTime, setStartTime] = useState('');
+    const [startLocation, setStartLocation] = useState('');
 
     useEffect(() => {
         (async () => {
@@ -36,31 +37,27 @@ function Rent(){
         setSelectedCity(event.target.value);
     };
 
-    useEffect(() => {
-        (async () => {
-            const userInfo = await fetching.fetchResult();
-            setUserId(userInfo.id);
-        })();
-    }, []);
-
-    const startBikeRide = (event, userId) => {
+    const startBikeRide = (event) => {
         setBikeId(event.target.value);
+        console.log(event.target.value);
         const requestOptions = {
             method: 'POST',
+            credentials: 'include',
             headers: { 'content-type': 'application/json'},
-            body: JSON.stringify({ bike_id: event.target.value, user_id: userId })
+            body: JSON.stringify({ bike_id: event.target.value})
         };
         fetch('http://localhost:1337/api/v01/bikeride', requestOptions)
         .then(response => response.json())
-        .then(data => console.log(data))
+        .then(data => {console.log(data); setStartTime(data.startTime); setStartLocation(data.startLocation)})
         .catch(error => console.error(error));
     };
 
-    const endBikeRide = (bike_id, startLocation, startTime, user_id) => {
+    const endBikeRide = (event) => {
         const requestOptions = {
             method: 'PUT',
+            credentials: 'include',
             headers: { 'content-type': 'application/json' },
-            body: JSON.stringify({ bike_id, startLocation, startTime, user_id }),
+            body: JSON.stringify({ bike_id: event.target.value, startTime: startTime, startLocation: startLocation }),
         };
         fetch('http://localhost:1337/api/v01/bikeride/stop', requestOptions)
         .then(response => response.json())
@@ -95,8 +92,8 @@ function Rent(){
                             <td>{bike.bike_id}</td>
                             <td>{bike.parking}</td>
                             <td>{bike.available_status}</td>
-                            <td><button value={bike.bike_id} onClick={(event) => startBikeRide(event, userId)}>Hyr</button></td>
-                            <td><button value={bike.bike_id} onClick={(event) => endBikeRide(event, bike.bike_id, startLocation, startTime, userId )}>Avsluta</button></td>
+                            <td><button value={bike.bike_id} onClick={(event) => startBikeRide(event)}>Hyr</button></td>
+                            <td><button value={bike.bike_id} onClick={(event) => endBikeRide(event)}>Avsluta</button></td>
                         </tr>)
                         :
                     <p></p>

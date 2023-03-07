@@ -1,9 +1,10 @@
 const BikeRide = require("../services/bikeProgram/bikeRide.js");
 
 const startBikeRideController = async function (req, res, next) {
-
-   try {
-        let Bikeride = await new BikeRide().startBikeRide(req.body.bikeId, req.body.userId);
+    console.log(req.user.user_id);
+    let user_id = req.user.user_id
+    try {
+        let Bikeride = await new BikeRide().startBikeRide(req.body.bike_id, user_id);
         res.json(Bikeride);
     } catch (error) {
         res.json(error);
@@ -11,7 +12,7 @@ const startBikeRideController = async function (req, res, next) {
 }
 
 const stopBikeRideController = async function (req, res, next) {
-
+    req.body.user_id = req.user.user_id;
     try {
         let Bikeride = await new BikeRide().stopBikeRide(req.body);
        // console.log(Bikeride)
