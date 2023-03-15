@@ -88,9 +88,8 @@ app.get('/google/callback', passport.authenticate('google', { failureRedirect: '
 );
 
 app.get('/logout', (req, res) => {
-    let redirectUrl = req.user.origin
+    let redirectUrl = req.user.origin;
     req.logout(() => {
-        console.log(redirectUrl);
         switch (redirectUrl) {
             case '1338':
                 res.redirect("http://localhost:1338");

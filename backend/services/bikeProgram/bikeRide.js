@@ -108,6 +108,7 @@ module.exports = class BikeRide {
             let direction = Math.floor(Math.random() * 4);
 
             // Räkna ut vinkeln för förflyttningen i radianer
+            // kompass riktning
             let bearing;
             switch (direction) {
                 case 0:
@@ -128,7 +129,7 @@ module.exports = class BikeRide {
 
             let bearingRad = bearing * (Math.PI / 180);
 
-            // Räkna ut den nya latituden och longituden
+            // Räkna ut den nya latituden och longituden (haversine-formel för att beräkna avståndet mellan två punkter på en sfär)
             let endLat = startLat + (distance * Math.cos(bearingRad)) / 111.32;
             let endLng = startLng + (distance * Math.sin(bearingRad)) / (111.32 * Math.cos(startLat));
 

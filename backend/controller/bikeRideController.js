@@ -1,7 +1,6 @@
 const BikeRide = require("../services/bikeProgram/bikeRide.js");
 
 const startBikeRideController = async function (req, res, next) {
-    console.log(req.user.user_id);
     let user_id = req.user.user_id
     try {
         let Bikeride = await new BikeRide().startBikeRide(req.body.bike_id, user_id);
