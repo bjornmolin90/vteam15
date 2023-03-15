@@ -10,7 +10,7 @@ const startSimulator = async function () {
     // skapar 1000 cyklar
     for (let i = 0; i < 1000; i++) {
         bikeService.createBike({
-            "city": "stockholm",
+            "city": "Stockholm",
             "parking": "on-street",
             "charging_status": "100",
             "available_status": "ledig",
