@@ -61,4 +61,15 @@ const getAllBikesInACityController = async function (req, res, next) {
     }
 }
 
-module.exports = { deleteBikeByIdController, deleteAllBikesController, createBikeController, getBikeController, getAllBikesController, getAllBikesInACityController }
+const changeLocationBikeController = async function (req, res) {
+    let location = `${req.body.coordinate.latitude} ${req.body.coordinate.longitude}`;
+    let bike_id = req.body.bike_id;
+    try {
+        let changeLocation = await bikeService.getAllBikesInACity(bike_id, location);
+        res.status(200).json(changeLocation);
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
+
+module.exports = { changeLocationBikeController, deleteBikeByIdController, deleteAllBikesController, createBikeController, getBikeController, getAllBikesController, getAllBikesInACityController }

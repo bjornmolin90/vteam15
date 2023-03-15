@@ -8,8 +8,8 @@ router.get('/', bikeController.getAllBikesController);
 // localhost:1337/api/v01/bike/{id} - hämtar bikes med bike_id.
 router.get('/:id', bikeController.getBikeController);
 
-// localhost:1337/api/v01/bike/ - Hämta alla cyklar med status "Ledig".
-//router.get('/', bikeController.changeStatusBikeController);
+// localhost:1337/api/v01/bike/ - Ändrar koordinatern på en cykel.
+router.put('/', bikeController.changeLocationBikeController);
 
 // localhost:1337/api/v01/bike - skapar en ny bike.
 router.post('/', bikeController.createBikeController);
