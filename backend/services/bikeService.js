@@ -74,9 +74,9 @@ const deleteBikeById = async function(id) {
     }
 }
 
-const getAllBikesInACity = async function (city) {
+const getAllBikesInACity = async function (bikeId, location) {
     try {
-        return await bikeModels.getAllBikesInACity(city);
+        return await bikeModels.setLocation(bikeId, location);
     } catch (error) {
         return error;
     }

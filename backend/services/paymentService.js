@@ -40,19 +40,21 @@ async function executePayment(user_id) {
 }
 
 // Definiera en funktion som hanterar månatlig betalning
+// monthlyPayment är false eller true.
 async function handleMonthlyPayment(user_id, monthlyPayment) {
     // Koden för att hantera månatlig betalning här.
     try {
+        // om monthlyPayment är true så har kunden valt att ha automatisk betalning. 
         if (monthlyPayment) {
             await paymentModels.handleMonthlyPayment(user_id, monthlyPayment)
-            cronJobs[user_id] = cron.schedule('* * * * *', async () => {
-                console.log('CronJob 1 körs varje minut!');
+            cronJobs[user_id] = cron.schedule('0 0 26 * * *', async () => {
+                console.log('CronJob 1 körs på den 26:e varje månad!')
                 console.log(user_id);
                 await paymentModels.addMoneyAndPayAuto(user_id)
             })
             return "Done"
         }
-        // Stoppa cronJob med ID "job1"
+        // Stoppa cronJob med ID
         await paymentModels.handleMonthlyPayment(user_id, monthlyPayment)
         cronJobs[user_id].stop();
         //await paymentModels.handleMonthlyPayment(user_id, monthlyPayment)
