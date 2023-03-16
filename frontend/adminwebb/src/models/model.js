@@ -48,6 +48,22 @@ const fetching = {
 
         return result
     },
+
+    moveBike: async function moveBike(id, coor) {
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ bike_id: id, coordinate: coor})
+        };
+        console.log(requestOptions.body)
+        console.log(id)
+        const response = await fetch(`http://localhost:1337/api/v01/bike`, requestOptions);
+        const result = await response.json();
+        console.log(result)
+        window.location.reload()
+
+        return result
+    },
     
     deleteUser: async function deleteUser(id) {
         const response = await fetch(`http://localhost:1337/api/v01/user/${id}`);
