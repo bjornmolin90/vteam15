@@ -11,3 +11,6 @@ FLUSH PRIVILEGES;
 
 
 useSSL=1
+
+
+docker run -v "$(pwd)"/backend:/server -v /server/node_modules/ -p 1337:1337 --network vteams_dbwebb --name server 032b6a2ccdf8 /Björn

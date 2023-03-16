@@ -40,6 +40,22 @@ const fetching = {
 
         return result
     },
+
+    rides: async function rides(id) {
+        const response = await fetch(`http://localhost:1337/api/v01/bikeride/user/${id}`);
+        const result = await response.json();
+        console.log(result)
+
+        return result
+    },
+    
+    deleteUser: async function deleteUser(id) {
+        const response = await fetch(`http://localhost:1337/api/v01/user/${id}`);
+        const result = await response.json();
+        console.log(result)
+
+        return result
+    },
 };
 
 export default fetching;

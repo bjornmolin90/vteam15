@@ -5,20 +5,88 @@ import fetching from '../models/model';
   
 function Customers(){
     const [users, setUsers] = useState(false);
+    const [user, setUser] = useState({});
+    const [seeRides, setSeeRides] = useState([]);
     useEffect(() => {
         (async () => {
             const allUsers = await fetching.customers();
             setUsers(allUsers);
         })();
     }, []);
-    console.log(users)
+    
+    async function deleteUser() {
+
+    }
+
+    async function userInfo(event) {
+        const id = event.target.value
+        const fullInfo = users.filter(user => user.user_id == id);
+        const rides = await fetching.rides(id);
+        console.log(fullInfo)
+        console.log(rides)
+        setUser({
+            first: fullInfo[0].firstname,
+            last: fullInfo[0].lastname,
+            mail: fullInfo[0].u_email,
+            u_name: fullInfo[0].username,
+            id: fullInfo[0].user_id,
+            saldo: fullInfo[0].saldo,
+            city: fullInfo[0].city,
+            address: fullInfo[0].address,
+            postcode: fullInfo[0].postcode
+
+        })
+        setSeeRides(rides)
+        console.log(rides)
+    }
     return (
         <main>
-        {
-        users instanceof Array ? users.map((user, key) => <button key={user.user_id}>{user.username}</button>)
+            {users instanceof Array ?
+            <select
+                onChange={userInfo}
+            >
+                <option value="-99" key="0">Användare</option>
+                {users.map((user, index) => <option value={user.user_id}
+                        key={index}>{user.u_email}</option>)}
+            </select>
+            :
+            <p></p>
+            }
+            <div>
+                <br></br>
+                <p>Förnamn: <br></br><b>{user.first}</b></p>
+                <p>Efternamn: <br></br><b>{user.last}</b></p>
+                <p>E-mail: <br></br><b>{user.mail}</b></p>
+                <p>Användarnamn: <br></br><b>{user.u_name}</b></p>
+                <p>Id: <br></br><b>{user.id}</b></p>
+                <p>Saldo: <br></br><b>{user.saldo}</b></p>
+                <p>Stad: <br></br><b>{user.city}</b></p>
+                <p>Adress: <br></br><b>{user.address}</b></p>
+                <p>Postnummer: <br></br><b>{user.postcode}</b></p>
+            </div>
+                <button onClick={deleteUser}>Ta bort användare</button>
+            <div>
+                <p><b>Tidigare resor:</b></p>
+                {seeRides.map((ride, index) =>
+                <div>
+                <p>Starttid: {ride.start_time}</p>
+                <p>Sluttid: {ride.end_time}</p>
+                <p>Startposition: {ride.start_position}</p>
+                <p>Slutposition: {ride.end_position}</p>
+                <p>Kostnad: {ride.cost} kr</p>
+                <p>Reseid: {ride.ride_id}</p>
+                <p>Cykelid: {ride.bike_id}</p>
+                <p>------------------------------------</p>
+                </div>
+                )}
+            </div>
+
+                       
+{/*         {
+        users instanceof Array ? users.map((user, key) => <button key={user.user_id}>Id: {user.user_id} Namn: {user.firstname} {user.lastname} </button>)
             :
         <p></p>
-        }
+        } */}
         </main>
     )
 }
