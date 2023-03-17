@@ -62,7 +62,7 @@ const getAllBikesInACityController = async function (req, res, next) {
 }
 
 const changeLocationBikeController = async function (req, res) {
-    let location = `${req.body.coordinate.latitude} ${req.body.coordinate.longitude}`;
+    let location = `${req.body.coordinate.latitude}, ${req.body.coordinate.longitude}`;
     let bike_id = req.body.bike_id;
     try {
         let changeLocation = await bikeService.getAllBikesInACity(bike_id, location);
