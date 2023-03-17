@@ -7,6 +7,7 @@ function Customers(){
     const [users, setUsers] = useState(false);
     const [user, setUser] = useState({});
     const [seeRides, setSeeRides] = useState([]);
+    let currentUser = 0;
     useEffect(() => {
         (async () => {
             const allUsers = await fetching.customers();
@@ -15,7 +16,9 @@ function Customers(){
     }, []);
     
     async function deleteUser() {
-
+        await fetching.deleteUser(user.id);
+        const allUsers = await fetching.customers();
+        setUsers(allUsers)
     }
 
     async function userInfo(event) {
@@ -37,6 +40,7 @@ function Customers(){
 
         })
         setSeeRides(rides)
+        currentUser = id
         console.log(rides)
     }
     return (
@@ -64,7 +68,7 @@ function Customers(){
                 <p>Adress: <br></br><b>{user.address}</b></p>
                 <p>Postnummer: <br></br><b>{user.postcode}</b></p>
             </div>
-                <button onClick={deleteUser}>Ta bort användare</button>
+                
             <div>
                 <p><b>Tidigare resor:</b></p>
                 {seeRides.map((ride, index) =>
@@ -80,13 +84,9 @@ function Customers(){
                 </div>
                 )}
             </div>
-
-                       
-{/*         {
-        users instanceof Array ? users.map((user, key) => <button key={user.user_id}>Id: {user.user_id} Namn: {user.firstname} {user.lastname} </button>)
-            :
-        <p></p>
-        } */}
+            <div>
+            <button class="login-button" onClick={deleteUser}>Ta bort användare</button>
+            </div>
         </main>
     )
 }

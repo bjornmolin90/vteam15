@@ -60,13 +60,16 @@ const fetching = {
         const response = await fetch(`http://localhost:1337/api/v01/bike`, requestOptions);
         const result = await response.json();
         console.log(result)
-        window.location.reload()
 
         return result
     },
     
     deleteUser: async function deleteUser(id) {
-        const response = await fetch(`http://localhost:1337/api/v01/user/${id}`);
+        const requestOptions = {
+            method: 'delete',
+            headers: { 'Content-Type': 'application/json' },
+        };
+        const response = await fetch(`http://localhost:1337/api/v01/user/${id}/`, requestOptions);
         const result = await response.json();
         console.log(result)
 
