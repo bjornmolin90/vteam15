@@ -6,7 +6,6 @@ import Rides from "./Rides";
 import Account from "./Account";
 
 
-
 function Router() {
   let element = useRoutes([
     {

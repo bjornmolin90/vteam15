@@ -1,0 +1,166 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+}
+
+.saldo--form--div {
+    flex-direction: row;
+    margin: auto;
+    width: 33vw;
+    margin-top: 1.5em;
+    margin-bottom: 0.6em;
+}
+
+.saldo--form--div p {
+    margin-right: 0.7em;
+    margin-bottom: 1em;
+}
+
+.balance {
+    font-size: 16px;
+}
+
+.saldo--form--div input{
+    width: 30%;
+    padding: 0.5em;
+    margin-right: 0.1em;
+    border-radius: 0.5em;
+    border-color: lightgrey;
+    border-width: thin;
+    font-size: 16px;
+    color: black;
+}
+
+.payButton {
+    padding: 0.7em 0.6em;
+    margin-left:0.4em;
+    background-color: rgb(57, 77, 149);
+    border-radius: 10px;
+    margin-bottom: 1.6em;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    font-size: 15.5px;
+    font-weight: 400;
+    width: 27%;
+}
+
+.form--manual {
+    display: flex;
+    gap: 1em;
+    flex-direction: column;
+    width: 39vw;
+    margin: auto;
+    margin-top: 2em;
+    background-color: rgb(235, 242, 247);
+    border-radius: 10px;
+    padding: 2.5em;
+}
+
+.doublediv {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.doublediv div {
+    width: 49%;
+}
+
+.form--div {
+    width: 100%;
+}
+
+input {
+    width: 100%;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    border-color: lightgrey;
+    border-width: thin;
+    font-size: 15px;
+    color: black;
+}
+
+.submitButton {
+    padding: 1em 3em;
+    background-color: rgb(57, 77, 149);
+    border-radius: 10px;
+    margin-top: 2em;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 2.5em;
+}
+
+.cardButton {
+    padding: 1em 0.4em;
+    background-color: rgb(57, 77, 149);
+    border-radius: 10px;
+    margin-top: 1em;
+    margin-bottom: 2.7em;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+    width: 37%;
+}
+
+.balanceButton {
+    margin: 0 auto;
+    padding: 1em 0.3em;
+    background-color: rgb(57, 77, 149);
+    border-radius: 10px;
+    margin-bottom: 1.6em;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+    width: 35%;
+}
+
+.check-balance{
+    align-items: center;
+    margin-top: 5em;
+    padding: 1em;
+}
+
+h3 {
+    display: block;
+    text-align: left;
+    padding: 0.8em;
+    font-size: 20px;
+}
+
+.saldo input {
+    width: 45%
+}
+
+.saldo {
+    padding: 0.7em;
+}
+
+h4 {
+    padding: 0.6em;
+    font-size: 20px;
+    margin-top: 0.7em;
+}
+
+.form--manual p {
+    padding-top: 0.2em;
+    padding-bottom: 1em;
+}
+
+h5 {
+    margin: 0 auto;
+    padding: 0.3em;
+    font-size: 19px;
+    font-weight: 300;
+    font-style: italic;
+}
