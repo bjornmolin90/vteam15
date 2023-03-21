@@ -1,30 +1,22 @@
-import React from 'react';
-import {useForm} from 'react-hook-form';
-import '../style/Form.css';
+import React from "react";
+import { useForm } from "react-hook-form";
+import "../style/Form.css";
 //install: npm install react-hook-form
-let counter = 0;
-function Inlogg(){
-    const {register, handleSubmit} = useForm();
-    const onSubmit = (d) => 
-    alert(JSON.stringify(d));
+
+function Inlogg() {
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <div className='box-content'>
             <div className='form'>
-            <h2>Logga in</h2>
-            <label>
-                E-post:
-                <input {...register("firstName")}/>
-            </label>
-            <br></br>
-            <label>
-                Lösenord:
-                <input {...register("lastName")}/>
-            </label>
-            <p>Render: <span>{counter++}</span></p>
-            <input type="submit" value="Logga in"/>
+                <h2>Logga in på ditt konto</h2>
+                <button type='submit' className='loginButton'>
+                    Logga in med Google
+                </button>
             </div>
-        </form>
-    )
+            <p>
+                Har du inget konto?<a href='http://localhost:1340/registera'> Registera dig</a>
+            </p>
+        </div>
+    );
 }
-  
-export default Inlogg; 
+
+export default Inlogg;
