@@ -1,8 +1,87 @@
-.form h2 {
-    margin-top: 4em;
-    font-size: 1.5rem;
+.form {
+    display: flex;
+    justify-content: center;
+    gap: 0.2em;
+    flex-direction: column;
+    width: 30vw;
+    margin: auto;
+    margin-top: 5.5em;
+    background-color: rgb(235, 242, 247);
+    border-radius: 10px;
+    padding: 2.5em;
 }
 
-label {
-    padding-top: 1em;
+.form-content h2 {
+    margin-bottom: 0.6em;
 }
+
+.account-check p a {
+    text-decoration: none;
+    color: #000;
+    font-weight: 600;
+    font-size: 18px;
+    padding-top: 2em;
+}
+
+.box-content p {
+    padding-top: 1.5em;
+}
+
+.box-content a {
+    text-decoration: none;
+    color: #000;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.box-content .form h2 {
+    margin-bottom: 0.8em;
+}
+
+.form h2 {
+    padding-top: 1.5em;
+    padding-bottom: 0.8em;
+    font-size: 21px;
+}
+
+label p {
+    padding-bottom: 0.8em;
+    padding-top: 0.1em;
+}
+
+.loginButton {
+    padding: 1em 2em;
+    background-color: rgb(57, 77, 149);
+    border-radius: 10px;
+    margin-top: 1em;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    width: 80%;
+    margin: 0 auto;
+    color: #fff;
+}
+
+.registerButton {
+    padding: 1em 4em;
+    background-color: rgb(57, 77, 149);
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    width: 80%;
+    color: #fff;
+    margin: 0 auto;
+    margin-top: 1.5em;
+}
+
+label input {
+    padding: 0.7em 0.8em;
+    border-radius: 0.5em;
+    border-color: lightgrey;
+    border-width: thin;
+    font-size: 15px;
+    width: 80%;
+    margin: 0.09em;
+}
+
