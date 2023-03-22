@@ -40,6 +40,41 @@ const fetching = {
 
         return result
     },
+
+    rides: async function rides(id) {
+        const response = await fetch(`http://localhost:1337/api/v01/bikeride/user/${id}`);
+        const result = await response.json();
+        console.log(result)
+
+        return result
+    },
+
+    moveBike: async function moveBike(id, coor) {
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ bike_id: id, coordinate: coor})
+        };
+        console.log(requestOptions.body)
+        console.log(id)
+        const response = await fetch(`http://localhost:1337/api/v01/bike`, requestOptions);
+        const result = await response.json();
+        console.log(result)
+
+        return result
+    },
+    
+    deleteUser: async function deleteUser(id) {
+        const requestOptions = {
+            method: 'delete',
+            headers: { 'Content-Type': 'application/json' },
+        };
+        const response = await fetch(`http://localhost:1337/api/v01/user/${id}/`, requestOptions);
+        const result = await response.json();
+        console.log(result)
+
+        return result
+    },
 };
 
 export default fetching;

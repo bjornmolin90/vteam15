@@ -4,18 +4,18 @@ networks:
     dbwebb:
 
 services:
-    server:
-        container_name: "server"
-        build:
-            context: ./backend
-            dockerfile: Dockerfile
-        ports: 
-            - "1337:1337"
-        networks:
-            dbwebb:
-        volumes:
-            - ./backend:/server
-            - /server/node_modules/
+#     server:
+#         container_name: "server"
+#         build:
+#             context: ./backend
+#             dockerfile: Dockerfile
+#         ports: 
+#             - "1337:1337"
+#         networks:
+#             dbwebb:
+#         volumes:
+#             - ./backend:/server
+#             - /server/node_modules/
 
     adminwebb:
         container_name: "adminwebb"

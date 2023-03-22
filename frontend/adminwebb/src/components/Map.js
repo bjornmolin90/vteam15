@@ -17,7 +17,6 @@ function Map (){
     const [park, setPark] = useState(false);
     useEffect(() => {
         const interval = setInterval(() => {
-          console.log('This will run every second!');
           getBikes()
         }, 20000);
         return () => clearInterval(interval);
@@ -36,6 +35,18 @@ function Map (){
             const allBikes = await fetching.bikes();
             setBikes(allBikes);
         }
+    
+    async function moveBike(event) {
+        console.log(event.target.value)
+        const valueArray = event.target.value.split(',')
+        const id = valueArray[2]
+        const coor = {
+          latitude: valueArray[0],
+          longitude: valueArray[1]
+        }
+        await fetching.moveBike(id, coor);
+    }
+
     let mapBikes = ""
     let mapPark = ""
     let mapCharge = ""
@@ -43,6 +54,16 @@ function Map (){
         mapBikes = bikes.map((bike, key) => <Marker position={bike.m_location.split(', ').map((item) => parseFloat(item))} icon={icon}>
         <Popup>
         bike: {bike.bike_id} <br></br> status: {bike.available_status}
+        <br></br>
+        Flytta cykel till laddstation:
+        <br></br>
+        <select
+              onChange={moveBike}  
+            >
+                <option value="-99" key="0">Välj station</option>
+                {charge.filter(charger => 59.3 < charger.latitude && charger.latitude < 59.4 && charger.longitude > 17.9 && charger.longitude < 18.2).map((charging, index) => <option value={[charging.latitude, charging.longitude, bike.bike_id]}
+                        key={index}>Laddstation {index +1}</option>)}
+            </select>
         </Popup>
         </Marker>)
     }
@@ -54,6 +75,9 @@ function Map (){
     
     if (charge) { 
         mapCharge = charge.map((charge, key) => <Marker position={[charge.latitude, charge.longitude]} icon={cIcon}>
+          <Popup>
+            Laddstation {key +1}
+          </Popup>
         </Marker>)
     }
     console.log(mapBikes)
