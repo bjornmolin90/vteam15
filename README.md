@@ -50,9 +50,7 @@ DELETE | /api/v01/user/ | Tar bort alla registrerade användare. | -
 DELETE | /api/v01/user/{id} | Tar bort vald användare. | -
 GET | /api/v01/payment | Hämtar användarens kontouppgifter. | -
 POST | /api/v01/payment | Betalar allt | -
-POST | /api/v01/payment/add/account | Lägger till ett konto  | {
-    "account":{"card_number":123132123123, "csv": 132}
-}
+POST | /api/v01/payment/add/account | Lägger till ett konto  | Json - "account":{"card_number":123132123123, "csv": 132}
 PUT | /api/v01/payment | Insättning av pengar. | Json - { "balance": 6000 }
 PUT | /api/v01/payment/monthly-payment | Automatisk betalning. | Json - { "monthlyPayment": false/true }
 GET | /api/v01/locations/charger | Hämtar alla koordinater för laddnings stationerna. | -
