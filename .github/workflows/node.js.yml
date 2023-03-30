@@ -34,6 +34,9 @@ jobs:
     - name: install dependencies customermobile
       working-directory: ./frontend/customermobile
       run: npm install
+    - name: install dependencies backend
+      working-directory: ./backend
+      run: npm install
     - name: run tests adminwebb
       working-directory: ./frontend/adminwebb
       run: npm test
