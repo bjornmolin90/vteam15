@@ -43,3 +43,6 @@ jobs:
     - name: run tests customermobile
       working-directory: ./frontend/customermobile
       run: npm test
+    - name: run tests backend
+      working-directory: ./backend
+      run: npm test
