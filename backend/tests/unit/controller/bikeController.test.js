@@ -24,7 +24,7 @@ describe('bikeController', () => {
             // Definiera en mock funktion för createBike som returnerar "Yes"
             bikeService.createBike.mockReturnValueOnce("yes");
 
-            const req = { body: 'apa' };
+            const req = { body: 'Test' };
             const res = {
                 status: jest.fn().mockReturnThis(),
                 json: jest.fn(),
@@ -40,7 +40,7 @@ describe('bikeController', () => {
             // Definiera en mock funktion för createBike som returnerar "Yes"
             bikeService.createBike.mockImplementationOnce(() => { throw new Error() });
 
-            const req = { body: 'apa' };
+            const req = { body: 'Test' };
             const res = {
                 status: jest.fn().mockReturnThis(),
                 json: jest.fn(),
