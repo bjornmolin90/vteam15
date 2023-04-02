@@ -1,0 +1,100 @@
+div .payment {
+    /* margin-top: 5em;
+    margin-bottom: 1em; */
+}
+
+.paymentform {
+    /* margin: 0 auto; */
+    /* padding-top: 2em; */
+    text-align: center;
+}
+
+.input {
+    /* margin-bottom: 3em;
+    margin-right: 1em; */
+    margin-right: 0.5em;
+}
+
+.paymentMethods {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.label {
+    padding: 1em 3em;
+    background-color: rgb(209, 209, 209);
+    border-radius: 10px;
+    color: #000;
+    font-size: 16px;
+    text-align: center;
+    display: flex;
+    margin-bottom: 1em;
+}
+
+.onOffSwitch {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2em;
+    margin-top: 0.5em;
+}
+
+.onOffBackground {
+    cursor: pointer;
+    background-color: rgb(209, 209, 209);
+    outline: 1.7px solid rgb(65, 65, 65);
+    height: 1.7em;
+    width: 4.5em;
+    border-radius: 25px;
+}
+
+.form--non--manual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.45em;
+    flex-direction: column;
+    width: 30vw;
+    margin: 2em auto;
+    background-color: rgb(235, 242, 247);
+    border-radius: 10px;
+    padding: 3em 0;
+}
+
+.onOffCircle {
+    height: 2em;
+    width: 2em;
+    background-color: rgb(50, 50, 50);
+    border-radius: 23px;
+    position: absolute;
+    transition: transform 150ms ease-in-out;
+}
+
+h2 {
+    margin-bottom: 1.5em;
+}
+
+.goback {
+    margin-top: 2em;
+    margin-bottom: 4em;
+}
+
+.checkButton {
+    padding: 1em 3em;
+    background-color: rgb(57, 77, 149);
+    border-radius: 10px;
+    margin-top: 0.5em;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 1em;
+}
+
+.payment h5 {
+    margin-bottom: 1em;
+}
