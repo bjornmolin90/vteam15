@@ -22,7 +22,11 @@
     font-size: 16px;
 }
 
-.saldo--form--div input{
+/* form {
+    outline: solid 1px red;
+} */
+
+.saldo--form--div input {
     width: 30%;
     padding: 0.5em;
     margin-right: 0.1em;
@@ -33,9 +37,18 @@
     color: black;
 }
 
-.payButton {
+.forms {
+    display: flex;
+    flex-direction: column;
+    width: 39vw;
+    margin: auto;
+    background-color: rgb(235, 242, 247);
+    border-radius: 10px;
+}
+
+.paymentButton {
     padding: 0.7em 0.6em;
-    margin-left:0.4em;
+    margin-left: 0.4em;
     background-color: rgb(57, 77, 149);
     border-radius: 10px;
     margin-bottom: 1.6em;
@@ -53,8 +66,6 @@
     flex-direction: column;
     width: 39vw;
     margin: auto;
-    margin-top: 2em;
-    background-color: rgb(235, 242, 247);
     border-radius: 10px;
     padding: 2.5em;
 }
@@ -102,7 +113,7 @@ input {
     background-color: rgb(57, 77, 149);
     border-radius: 10px;
     margin-top: 1em;
-    margin-bottom: 2.7em;
+    margin-bottom: 0.4em;
     border: none;
     cursor: pointer;
     color: #fff;
@@ -125,7 +136,12 @@ input {
     width: 35%;
 }
 
-.check-balance{
+.balanceButton a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.check-balance {
     align-items: center;
     margin-top: 5em;
     padding: 1em;
@@ -164,3 +180,17 @@ h5 {
     font-weight: 300;
     font-style: italic;
 }
+
+.monPay a {
+    padding: 1em 2em;
+    border-bottom: 1em;
+    text-decoration: none;
+    background-color: rgb(57, 77, 149);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 16px;
+    margin-top: 2em;
+}
+
+/* test git
+} */
