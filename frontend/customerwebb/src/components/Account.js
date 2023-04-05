@@ -3,6 +3,7 @@ import fetching from "../models/model";
 import "../style/Account.css";
 
 function Account() {
+    const [bikeRides, setBikeRides] = useState({});
     const [user, setUser] = useState({});
     const [account, setAccount] = useState({});
     const [depositAmount, setDepositAmount] = useState(0);
@@ -12,6 +13,8 @@ function Account() {
         (async () => {
             const myUser = await fetching.customers();
             setUser(myUser);
+            const bikeRide = await fetching.bikeRides();
+            setBikeRides(bikeRide);
         })();
     }, []);
 
@@ -101,8 +104,20 @@ function Account() {
         let addedBalance = event.target[0].value;
         setDepositAmount((prevAmount) => prevAmount + Number(addedBalance));
     }
+
+    function handleClick(){
+        fetching.payNow();
+        location.reload();
+    }
     return (
         <main>
+            <div onLoad={userInfo} className='check-balance'>
+               
+                {bikeRides.status == "unpaid" ? <> <h2>Att betala:</h2><h5> {bikeRides.totalcost} Kr</h5><button onClick={handleClick} className='paymentButton'>
+                    Betala
+                </button></> : ""}
+                <br></br>
+            </div>
             <div onLoad={userInfo} className='check-balance'>
                 <h2>Nuvarande saldo för detta konto: </h2>
                 {account.length > 0 && <h5>{Number(account[0].balance)} Kr</h5>}
@@ -162,7 +177,7 @@ function Account() {
             </div>
             <form className='form--manual' onSubmit={addBalanceToAccount}>
                 <button type='submit' className='submitButton'>
-                    Bekräfta och betala
+                    Bekräfta insättning
                 </button>
             </form>
         </main>
