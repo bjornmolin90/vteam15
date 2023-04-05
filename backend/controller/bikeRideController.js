@@ -34,7 +34,8 @@ const getAllBikeRidesController = async function (req, res, next) {
 
 const getAllBikeridesByBikeIdController = async function (req, res, next) {
     try {
-        let bikeId = req.params.id;
+        let bikeId = req.params.id ? req.params.id : req.user.user_id;
+        console.log(bikeId);
         let Bikeride = await new BikeRide().getAllBikeRidesByBikeId(bikeId);
         // console.log(Bikeride)
         res.status(200).json(Bikeride);
@@ -46,7 +47,8 @@ const getAllBikeridesByBikeIdController = async function (req, res, next) {
 
 const getAllBikeridesByUserIdController = async function (req, res, next) {
     try {
-        let bikeId = req.params.id;
+        let bikeId = req.params.id ? req.params.id : req.user.user_id;
+        console.log(bikeId);
         let Bikeride = await new BikeRide().getAllBikeRidesByUserId(bikeId);
         // console.log(Bikeride)
         res.status(200).json(Bikeride);

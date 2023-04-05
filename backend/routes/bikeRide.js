@@ -11,6 +11,9 @@ router.get('/bike/:id', bikeRideController.getAllBikeridesByBikeIdController);
 // Hämtar alla cykelturer för den valda user
 router.get('/user/:id', bikeRideController.getAllBikeridesByUserIdController);
 
+// Hämtar alla cykelturer för den valda user
+router.get('/user', bikeRideController.getAllBikeridesByUserIdController);
+
 // startar bikeRide
 router.post('/', bikeRideController.startBikeRideController);
 

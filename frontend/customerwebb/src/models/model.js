@@ -67,6 +67,46 @@ const fetching = {
 
         return result;
     },
+
+    bikeRides: async function bikeRides() {
+        const response = await fetch(`http://localhost:1337/api/v01/bikeride/user`, {
+            credentials: "include",
+            method: "GET",
+            headers: {
+                "content-type": "application/json",
+            },
+        });
+        const result = await response.json();
+        console.log(result);
+        let numbers = result;
+        let sum = 0;
+
+        for (let i = 0; i < numbers.length; i++) {
+           
+            if (numbers[i].status === "unpaid") {
+                sum += numbers[i].cost;
+                result.status = "unpaid";
+            }
+        }
+        result.totalcost = sum;
+        console.log(result);
+        return result;
+
+    },
+
+    payNow: async function payNow() {
+        const response = await fetch(`http://localhost:1337/api/v01/payment`, {
+            credentials: "include",
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+            },
+        });
+        const result = await response;
+        console.log(result.status);
+
+        return result;
+    }
 };
 //test git
 export default fetching;
